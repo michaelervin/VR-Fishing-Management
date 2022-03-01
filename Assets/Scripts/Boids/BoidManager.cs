@@ -22,6 +22,11 @@ public class BoidManager : MonoBehaviour {
         b.Initialize(settings, target);
     }
 
+    internal void UnregisterBoid(Boid boid)
+    {
+        boids.Remove(boid);
+    }
+
     void Update ()
     {
         if (boids == null || boids.Count == 0)

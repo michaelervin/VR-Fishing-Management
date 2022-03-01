@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4474d4e6eaf11324f867ddfe0dde1f75, type: 3}
-  m_Name: Sunfish
+  m_Name: GenericFish
   m_EditorClassIdentifier: 
-  description: TODO
-  size: 0.16
+  description: This is a generic fish
+  size: 0.5
   acceptableFood: 

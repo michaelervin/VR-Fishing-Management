@@ -5,6 +5,7 @@ using UnityEngine;
 public class FishData : ScriptableObject
 {
     public string description;
+    public float size;
 
     public List<FishFood> acceptableFood;
 }

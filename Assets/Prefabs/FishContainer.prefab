@@ -140,9 +140,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8402855909947681736}
-  - component: {fileID: 2168979345959484945}
+  - component: {fileID: 466211506190226227}
   - component: {fileID: 2457385801537776573}
-  - component: {fileID: 7350393552710802737}
   m_Layer: 0
   m_Name: FishContainer
   m_TagString: Untagged
@@ -165,7 +164,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2168979345959484945
+--- !u!114 &466211506190226227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,10 +173,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2979003930999231217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6593d30f6db1ebe44a0696d7fb3bf86e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c36068b6e3e0c043a7f9ae983d7915e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 0
+  capacity: 10
+  usedCapacity: 0
+  fish: []
 --- !u!114 &2457385801537776573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,21 +194,6 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: aa6940781c322714a90bdfd4bffdfcf9, type: 2}
   compute: {fileID: 7200000, guid: 0cee28ce82fca1b48aceb59efc21ddda, type: 3}
   target: {fileID: 0}
---- !u!114 &7350393552710802737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2979003930999231217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a99f003f6416b8149a2f712dc0fdcde2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boidManager: {fileID: 2457385801537776573}
-  prefab: {fileID: 8218006968222301386, guid: 0da9eafe943bcb742b259703cbc2d53f, type: 3}
-  colour: {r: 0.4078431, g: 0.7119127, b: 1, a: 1}
 --- !u!1 &3490145231031758578
 GameObject:
   m_ObjectHideFlags: 0
