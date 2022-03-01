@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    // Start is called before the first frame update
-    FishData data;
+    public FishData data;
+    public FishContainer container;
 
     void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }

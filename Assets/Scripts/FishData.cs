@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu()]
-internal class FishData : ScriptableObject
+public class FishData : ScriptableObject
 {
     public string description;
 
