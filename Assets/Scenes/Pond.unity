@@ -491,6 +491,133 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1913382219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2042396064066834430, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
+  m_PrefabInstance: {fileID: 7424735265158182806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1913382223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913382219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateActionSetOnAttach:
+    actionSetPath: 
+  hideHandOnAttach: 1
+  hideSkeletonOnAttach: 0
+  hideControllerOnAttach: 0
+  handAnimationOnPickup: 0
+  setRangeOfMotionOnPickup: -1
+  useHandObjectAttachmentPoint: 1
+  attachEaseIn: 0
+  snapAttachEaseInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapAttachEaseInTime: 0.15
+  snapAttachEaseInCompleted: 0
+  skeletonPoser: {fileID: 0}
+  handFollowTransform: 1
+  highlightOnHover: 1
+  hideHighlight: []
+  hoverPriority: 0
+--- !u!114 &1913382224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913382219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffefbea063cab884ca33e5a449e5c22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachmentFlags: 44
+  attachmentOffset: {fileID: 0}
+  catchingSpeedThreshold: -1
+  releaseVelocityStyle: 1
+  releaseVelocityTimeOffset: -0.011
+  scaleReleaseVelocity: 1.1
+  scaleReleaseVelocityThreshold: -1
+  scaleReleaseVelocityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  restoreOriginalParent: 0
+  onPickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onDetachFromHand:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeldUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  interactable: {fileID: 0}
+--- !u!54 &1913382225
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913382219}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &207283918571786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -561,31 +688,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.75
+      value: 0.2155
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.528
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.19
+      value: 1.453
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.07204928
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.632144
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7665312
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.08736619
       objectReference: {fileID: 0}
     - target: {fileID: 1668909652268661907, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -643,6 +770,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bobber
       objectReference: {fileID: 0}
+    - target: {fileID: 5389270536872673816, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389270536872673816, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0011
+      objectReference: {fileID: 0}
     - target: {fileID: 7732992218852036492, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.03
@@ -674,76 +809,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5588892423889693224, guid: 401430fb2db42ae40864ac56a32f4dbe, type: 3}
   m_PrefabInstance: {fileID: 7424735265158182806}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7424735265158182808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7424735265158182807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffefbea063cab884ca33e5a449e5c22c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentFlags: 44
-  attachmentOffset: {fileID: 0}
-  catchingSpeedThreshold: -1
-  releaseVelocityStyle: 1
-  releaseVelocityTimeOffset: -0.011
-  scaleReleaseVelocity: 1.1
-  scaleReleaseVelocityThreshold: -1
-  scaleReleaseVelocityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  restoreOriginalParent: 0
-  onPickUp:
-    m_PersistentCalls:
-      m_Calls: []
-  onDetachFromHand:
-    m_PersistentCalls:
-      m_Calls: []
-  onHeldUpdate:
-    m_PersistentCalls:
-      m_Calls: []
-  interactable: {fileID: 0}
---- !u!54 &7424735265158182809
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7424735265158182807}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &7424735265158182810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,12 +885,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7424735265158182807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9f6c46e88adc64181820ebf9519d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 458bcc6b464a53e41b0bbc765a292625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   endPointTransform: {fileID: 1143054953}
   pointDensity: 3
-  sagAmplitude: 1
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!120 &7424735265158182813
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -866,9 +936,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 1.23, y: 2.23658, z: 0.16194475}
-  - {x: 1.2324991, y: 2.104152, z: 0.19426766}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -876,8 +944,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 1
-        value: 0.0062884428
+        time: 0
+        value: 0.0062885284
         inSlope: 0
         outSlope: 0
         tangentMode: 0
