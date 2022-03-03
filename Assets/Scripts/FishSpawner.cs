@@ -10,6 +10,18 @@ public class FishSpawner : MonoBehaviour
     [SerializeField]
     BoidFishContainer container;
 
+    [SerializeField]
+    int spawnOnStartCount;
+
+    public IEnumerator Start()
+    {
+        for (int i = 0; i < spawnOnStartCount; i++)
+        {
+            OnSpawnFish();
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     public void OnDespawnFish()
     {
         try
