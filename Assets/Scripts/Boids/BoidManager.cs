@@ -19,12 +19,29 @@ public class BoidManager : MonoBehaviour {
     public void RegisterBoid(Boid b)
     {
         boids.Add(b);
-        b.Initialize(settings, target);
+        b.Initialize(settings);
+        b.SetTarget(target);
     }
 
-    internal void UnregisterBoid(Boid boid)
+    public void UnregisterBoid(Boid boid)
     {
         boids.Remove(boid);
+    }
+
+    public void RegisterTarget(Transform target)
+    {
+        foreach(Boid b in boids)
+        {
+            b.SetTarget(target);
+        }
+    }
+
+    public void UnregisterTarget(Transform target)
+    {
+        foreach (Boid b in boids)
+        {
+            b.SetTarget(null);
+        }
     }
 
     void Update ()

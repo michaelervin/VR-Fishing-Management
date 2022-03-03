@@ -34,8 +34,7 @@ public class Boid : MonoBehaviour {
         cachedTransform = transform;
     }
 
-    public void Initialize (BoidSettings settings, Transform target) {
-        this.target = target;
+    public void Initialize (BoidSettings settings) {
         this.settings = settings;
 
         position = cachedTransform.position;
@@ -43,6 +42,11 @@ public class Boid : MonoBehaviour {
 
         float startSpeed = (settings.minSpeed + settings.maxSpeed) / 2;
         velocity = transform.forward * startSpeed;
+    }
+
+    public void SetTarget (Transform target)
+    {
+        this.target = target;
     }
 
     public void SetColour (Color col) {

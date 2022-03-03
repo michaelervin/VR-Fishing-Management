@@ -34,4 +34,14 @@ public class BoidFishContainer : FishContainer
         boidDict.Remove(fish);
         fish.transform.parent = null;
     }
+
+    public void Add(Transform target)
+    {
+        boidManager.RegisterTarget(target);
+    }
+
+    public void Remove(Transform target)
+    {
+        boidManager.UnregisterTarget(target);
+    }
 }
