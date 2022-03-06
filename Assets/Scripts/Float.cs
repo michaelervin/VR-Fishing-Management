@@ -10,14 +10,12 @@ public class Float : MonoBehaviour
     [SerializeField] float airDrag = 1;
 
     Rigidbody rb;
-    bool inWater;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.drag = airDrag;
-        inWater = false;
     }
 
     private void OnTriggerStay(Collider other)
