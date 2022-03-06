@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Float : MonoBehaviour
 {
-    [SerializeField] float buoyancyForce = 9.8f;
+    [SerializeField] float buoyancyForce = 20f;
+    [SerializeField] float waterDrag = 15;
+    [SerializeField] float airDrag = 1;
 
     Rigidbody rb;
     bool inWater;
@@ -14,6 +16,7 @@ public class Float : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.drag = airDrag;
         inWater = false;
     }
 
@@ -22,6 +25,22 @@ public class Float : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             rb.AddForce(Vector3.up * buoyancyForce);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            rb.drag = waterDrag;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            rb.drag = airDrag;
         }
     }
 }

@@ -339,8 +339,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7739199198808552270, guid: b643ae44ddb4529468ba7ae6a3c5d9db, type: 3}
   m_PrefabInstance: {fileID: 115423571}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &115423573
-BoxCollider:
+--- !u!135 &115423573
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -350,7 +350,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.06
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &115423574 stripped
 Transform:
@@ -386,6 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buoyancyForce: 20
+  waterDrag: 15
+  airDrag: 1
 --- !u!1 &250594544 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2979003930999231217, guid: 1b454c43542d06f429308aac14af4565, type: 3}
