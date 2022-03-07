@@ -20,6 +20,13 @@ public class Fish : MonoBehaviour
         boid = GetComponent<Boid>();
     }
 
+    public Boid AddBoidComponent()
+    {
+        Boid b = gameObject.AddComponent<Boid>();
+        boid = b;
+        return b;
+    }
+
     private void FixedUpdate()
     {
         if (attatchedHook != null)
@@ -30,6 +37,12 @@ public class Fish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        FishContainer container = other.GetComponent<FishContainer>();
+        if(container != null)
+        {
+            container.Add(this);            
+        }
+
         FishFood fishFood = other.GetComponent<FishFood>();
         if(fishFood != null)
         {

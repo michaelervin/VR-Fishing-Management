@@ -31,15 +31,6 @@ public class FishSpawner : MonoBehaviour
     {
         Fish fish = Instantiate(prefab);
         fish.transform.rotation = UnityEngine.Random.rotation;
-        if (container.HasSpace(fish))
-        {
-            container.Add(fish);
-        }
-        else
-        {
-            Debug.Log("The container is full!");
-            Destroy(fish.gameObject);
-        }
     }
 
 }

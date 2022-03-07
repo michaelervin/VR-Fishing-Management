@@ -21,7 +21,7 @@ public class BoidFishContainer : FishContainer
         base.Add(fish);
         fish.transform.parent = transform;
         fish.transform.localPosition = Vector3.zero;
-        Boid boid = fish.gameObject.AddComponent<Boid>();
+        Boid boid = fish.AddBoidComponent();
         boidManager.RegisterBoid(boid);
         boidDict.Add(fish, boid);
     }
@@ -44,14 +44,5 @@ public class BoidFishContainer : FishContainer
     public void Remove(Transform target)
     {
         boidManager.UnregisterTarget(target);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        FishFood fishFood = other.GetComponent<FishFood>();
-        if(fishFood != null)
-        {
-            Add(fishFood.transform);
-        }
     }
 }
