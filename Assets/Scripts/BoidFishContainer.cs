@@ -19,8 +19,7 @@ public class BoidFishContainer : FishContainer
     public override void Add(Fish fish)
     {
         base.Add(fish);
-        fish.transform.parent = transform;
-        fish.transform.localPosition = Vector3.zero;
+        fish.transform.LookAt(transform);
         Boid boid = fish.AddBoidComponent();
         boidManager.RegisterBoid(boid);
         boidDict.Add(fish, boid);

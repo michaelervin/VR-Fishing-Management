@@ -34,6 +34,7 @@ public class Boid : MonoBehaviour {
     void Awake () {
         material = transform.GetComponentInChildren<MeshRenderer> ().material;
         cachedTransform = new GameObject("Heading").transform;
+        cachedTransform.position = transform.position;
         rb = GetComponent<Rigidbody>();
     }
 

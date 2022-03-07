@@ -10,8 +10,11 @@ public class Fish : MonoBehaviour
     [HideInInspector]
     public FishContainer container;
 
-    Rigidbody rb;
+    /// <summary>
+    /// The boid script attatched to the fish. This is null if the fish is not in a boid managed environment.
+    /// </summary>
     Boid boid;
+    Rigidbody rb;
     Hook attatchedHook;
 
     private void Start()
@@ -40,7 +43,14 @@ public class Fish : MonoBehaviour
         FishContainer container = other.GetComponent<FishContainer>();
         if(container != null)
         {
-            container.Add(this);            
+            container.Add(this);
+            // Don't enable boid script yet if the fish is still attatched to a hook
+            if(boid != null && attatchedHook != null)
+            {
+                boid.enabled = false;
+            }
+            rb.useGravity = false;
+            rb.isKinematic = true;
         }
 
         FishFood fishFood = other.GetComponent<FishFood>();
@@ -50,12 +60,37 @@ public class Fish : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        FishContainer container = other.GetComponent<FishContainer>();
+        if (container != null)
+        {
+            container.Remove(this);
+            rb.useGravity = true;
+        }
+    }
+
     public void AttachHook(Hook hook)
     {
         attatchedHook = hook;
         if (boid != null)
         {
             boid.enabled = false;
+        }
+        rb.isKinematic = true;
+    }
+
+    public void DetachHook()
+    {
+        attatchedHook = null;
+        transform.position += Vector3.right;
+        if (boid != null)
+        {
+            boid.enabled = true;
+        }
+        if(container == null)
+        {
+            rb.isKinematic = false;
         }
     }
 
