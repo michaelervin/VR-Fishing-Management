@@ -13,16 +13,7 @@ public class FishSpawner : MonoBehaviour
     [SerializeField]
     int spawnOnStartCount;
 
-    public IEnumerator Start()
-    {
-        for (int i = 0; i < spawnOnStartCount; i++)
-        {
-            OnSpawnFish();
-            yield return new WaitForSeconds(1f);
-        }
-    }
-
-    public void OnDespawnFish()
+    public void DespawnFish()
     {
         try
         {
@@ -36,9 +27,10 @@ public class FishSpawner : MonoBehaviour
         }
     }
 
-    public void OnSpawnFish()
+    public void SpawnFish()
     {
         Fish fish = Instantiate(prefab);
+        fish.transform.rotation = UnityEngine.Random.rotation;
         if (container.HasSpace(fish))
         {
             container.Add(fish);
