@@ -29,9 +29,20 @@ public class Boid : MonoBehaviour {
     Transform cachedTransform;
     Transform target;
 
+    Rigidbody rb;
+
     void Awake () {
         material = transform.GetComponentInChildren<MeshRenderer> ().material;
-        cachedTransform = transform;
+        cachedTransform = new GameObject("Heading").transform;
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnDestroy()
+    {
+        if(cachedTransform != null)
+        {
+            Destroy(cachedTransform.gameObject);
+        }
     }
 
     public void Initialize (BoidSettings settings) {
@@ -52,6 +63,24 @@ public class Boid : MonoBehaviour {
     public void SetColour (Color col) {
         if (material != null) {
             material.color = col;
+        }
+    }
+
+    private void Update()
+    {
+        if (rb == null)
+        {
+            transform.position = cachedTransform.position;
+            transform.rotation = cachedTransform.rotation;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (rb != null)
+        {
+            rb.MovePosition(cachedTransform.position);
+            rb.MoveRotation(cachedTransform.rotation);
         }
     }
 

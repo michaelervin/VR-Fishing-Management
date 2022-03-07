@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoidManager))]
+[RequireComponent(typeof(Collider))]
 public class BoidFishContainer : FishContainer
 {
     BoidManager boidManager;
@@ -43,5 +44,14 @@ public class BoidFishContainer : FishContainer
     public void Remove(Transform target)
     {
         boidManager.UnregisterTarget(target);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        FishFood fishFood = other.GetComponent<FishFood>();
+        if(fishFood != null)
+        {
+            Add(fishFood.transform);
+        }
     }
 }

@@ -34,6 +34,7 @@ public class BoidManager : MonoBehaviour {
         {
             b.SetTarget(target);
         }
+        this.target = target;
     }
 
     public void UnregisterTarget(Transform target)
