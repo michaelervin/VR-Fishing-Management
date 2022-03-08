@@ -27,7 +27,7 @@ public class Boid : MonoBehaviour {
     // Cached
     Material material;
     Transform cachedTransform;
-    Transform target;
+    List<Transform> targets;
 
     Rigidbody rb;
 
@@ -36,6 +36,7 @@ public class Boid : MonoBehaviour {
         cachedTransform = new GameObject("Heading").transform;
         cachedTransform.position = transform.position;
         rb = GetComponent<Rigidbody>();
+        targets = new List<Transform>();
     }
 
     private void OnDestroy()
@@ -56,9 +57,19 @@ public class Boid : MonoBehaviour {
         velocity = transform.forward * startSpeed;
     }
 
-    public void SetTarget (Transform target)
+    public void AddTarget (Transform target)
     {
-        this.target = target;
+        targets.Add(target);
+    }
+
+    public void AddTargets (IEnumerable<Transform> targets)
+    {
+        this.targets.AddRange(targets);
+    }
+
+    public void RemoveTarget (Transform target)
+    {
+        targets.Remove(target);
     }
 
     public void SetColour (Color col) {
@@ -88,9 +99,17 @@ public class Boid : MonoBehaviour {
     public void UpdateBoid () {
         Vector3 acceleration = Vector3.zero;
 
-        if (target != null) {
+        Vector3 closestTargetOffset = Vector3.one * settings.targetRadius;
+        foreach(Transform target in targets)
+        {
             Vector3 offsetToTarget = (target.position - position);
-            acceleration = SteerTowards (offsetToTarget) * settings.targetWeight;
+            if (offsetToTarget.sqrMagnitude < closestTargetOffset.sqrMagnitude)
+                closestTargetOffset = offsetToTarget;
+        }
+
+        if(closestTargetOffset.sqrMagnitude < settings.targetRadius * settings.targetRadius)
+        {
+            acceleration = SteerTowards(closestTargetOffset) * settings.targetWeight;
         }
 
         if (numPerceivedFlockmates != 0) {

@@ -8,11 +8,12 @@ public class BoidManager : MonoBehaviour {
 
     public BoidSettings settings;
     public ComputeShader compute;
-    public Transform target;
+    public List<Transform> targets;
     List<Boid> boids;
 
     public void Awake()
     {
+        targets = new List<Transform>();
         boids = new List<Boid>();
     }
 
@@ -20,7 +21,7 @@ public class BoidManager : MonoBehaviour {
     {
         boids.Add(b);
         b.Initialize(settings);
-        b.SetTarget(target);
+        b.AddTargets(targets);
     }
 
     public void UnregisterBoid(Boid boid)
@@ -32,17 +33,18 @@ public class BoidManager : MonoBehaviour {
     {
         foreach(Boid b in boids)
         {
-            b.SetTarget(target);
+            b.AddTarget(target);
         }
-        this.target = target;
+        targets.Add(target);
     }
 
     public void UnregisterTarget(Transform target)
     {
         foreach (Boid b in boids)
         {
-            b.SetTarget(null);
+            b.RemoveTarget(target);
         }
+        targets.Remove(target);
     }
 
     void Update ()
@@ -100,6 +102,14 @@ public class BoidManager : MonoBehaviour {
             get {
                 return sizeof (float) * 3 * 5 + sizeof (int);
             }
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        foreach(Transform target in targets)
+        {
+            Gizmos.DrawWireSphere(target.position, settings.targetRadius);
         }
     }
 }

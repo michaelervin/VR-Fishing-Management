@@ -13,8 +13,15 @@ public class BoidTargetSpawner : MonoBehaviour
 
     public void DespawnTarget()
     {
-        container.Remove(target.transform);
-        Destroy(target);
+        if (target)
+        {
+            container.Remove(target.transform);
+            Destroy(target);
+        }
+        else
+        {
+            Debug.Log("No longer have the last target spawned reference");
+        }
     }
 
     public void SpawnTarget()

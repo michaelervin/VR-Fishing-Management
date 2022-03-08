@@ -21,6 +21,7 @@ MonoBehaviour:
   cohesionWeight: 1
   seperateWeight: 2.5
   targetWeight: 2
+  targetRadius: 3
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1
