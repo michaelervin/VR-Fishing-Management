@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 8402855909947681736}
   - component: {fileID: 466211506190226227}
   - component: {fileID: 2457385801537776573}
+  - component: {fileID: 5385218558509256822}
   m_Layer: 0
   m_Name: FishContainer
   m_TagString: Untagged
@@ -194,6 +195,19 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: aa6940781c322714a90bdfd4bffdfcf9, type: 2}
   compute: {fileID: 7200000, guid: 0cee28ce82fca1b48aceb59efc21ddda, type: 3}
   target: {fileID: 0}
+--- !u!65 &5385218558509256822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979003930999231217}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3490145231031758578
 GameObject:
   m_ObjectHideFlags: 0
