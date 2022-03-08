@@ -10,6 +10,8 @@ public class FishEditor : Editor
     {
         DrawDefaultInspector();
 
+        if (!EditorApplication.isPlaying) return;
+
         Fish fish = (Fish)target;
         if(GUILayout.Button("Detatch hook"))
         {

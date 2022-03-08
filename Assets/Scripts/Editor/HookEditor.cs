@@ -10,9 +10,12 @@ public class HookEditor : Editor
     {
         DrawDefaultInspector();
 
-        if(GUILayout.Button("Add Bait"))
+        if (!EditorApplication.isPlaying) return;
+
+        Hook hook = (Hook)target;
+        if (GUILayout.Button("Add Bait"))
         {
-            ((Hook)target).AddBait();
+            hook.AddBait();
         }
     }
 }

@@ -10,6 +10,8 @@ public class BoidTargetSpawnerEditor : Editor
     {
         DrawDefaultInspector();
 
+        if (!EditorApplication.isPlaying) return;
+
         BoidTargetSpawner fishSpawner = (BoidTargetSpawner)target;
         if (GUILayout.Button("Spawn Target"))
         {
