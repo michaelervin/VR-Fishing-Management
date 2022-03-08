@@ -96,6 +96,10 @@ public class Fish : MonoBehaviour
 
     private void Eat(FishFood fishFood)
     {
+        if(container is BoidFishContainer)
+        {
+            ((BoidFishContainer)container).Remove(fishFood.transform);
+        }
         Destroy(fishFood.gameObject);
         Debug.Log("Nom");
     }

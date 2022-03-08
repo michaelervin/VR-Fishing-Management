@@ -14,6 +14,15 @@ public class FishFood : MonoBehaviour
             container.Add(transform);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        BoidFishContainer container = other.GetComponent<BoidFishContainer>();
+        if (container != null)
+        {
+            container.Remove(transform);
+        }
+    }
 }
 
 public enum FishFoodType
