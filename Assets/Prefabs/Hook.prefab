@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 8688564319089273681}
   - component: {fileID: 8688564319089273677}
   - component: {fileID: 8688564319089273676}
-  - component: {fileID: 8688564319089273680}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -159,17 +158,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hookChance: 1
   baitPrefab: {fileID: 3344591980247955264, guid: 053b91261bf89ab439f5e9102a8075c1, type: 3}
---- !u!114 &8688564319089273680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8688564319089273674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edced56c252d3274e989610be8365b23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followTransform: {fileID: 0}
-  offset: {x: 0, y: -3, z: 0}
