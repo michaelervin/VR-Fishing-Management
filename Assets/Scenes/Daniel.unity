@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 65357918826386913, guid: 1b454c43542d06f429308aac14af4565, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 650469606773003477, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -158,17 +154,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 3451499065386118573, guid: 1b454c43542d06f429308aac14af4565, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3640936763452376204, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5317454814849293360, guid: 1b454c43542d06f429308aac14af4565, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5379272283601879790, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_Enabled
@@ -178,25 +166,13 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 5405058636553599650, guid: 1b454c43542d06f429308aac14af4565, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5420505310834180196, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5504558447404868134, guid: 1b454c43542d06f429308aac14af4565, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6620550254546397178, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7600887793017134535, guid: 1b454c43542d06f429308aac14af4565, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402855909947681736, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_RootOrder

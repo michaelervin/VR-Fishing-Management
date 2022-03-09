@@ -8,7 +8,7 @@ public class BoidManager : MonoBehaviour {
 
     public BoidSettings settings;
     public ComputeShader compute;
-    public List<Transform> targets;
+    List<Transform> targets;
     List<Boid> boids;
 
     public void Awake()
