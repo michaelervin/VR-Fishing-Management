@@ -107,9 +107,12 @@ public class BoidManager : MonoBehaviour {
 
     public void OnDrawGizmos()
     {
-        foreach(Transform target in targets)
+        if(targets != null)
         {
-            Gizmos.DrawWireSphere(target.position, settings.targetRadius);
+            foreach (Transform target in targets)
+            {
+                Gizmos.DrawWireSphere(target.position, settings.targetRadius);
+            }
         }
     }
 }

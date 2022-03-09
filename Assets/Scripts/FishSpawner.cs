@@ -9,6 +9,19 @@ public class FishSpawner : MonoBehaviour
     Fish prefab;
     [SerializeField]
     BoidFishContainer container;
+    [SerializeField]
+    int spawnOnStartCount = 5;
+    [SerializeField]
+    float spawnTimeIncrement = 1f;
+
+    private IEnumerator Start()
+    {
+        for(int i=0; i<spawnOnStartCount; i++)
+        {
+            SpawnFish();
+            yield return new WaitForSeconds(spawnTimeIncrement);
+        }
+    }
 
     public void DespawnFish()
     {
@@ -27,7 +40,7 @@ public class FishSpawner : MonoBehaviour
     public void SpawnFish()
     {
         Fish fish = Instantiate(prefab);
-        fish.transform.rotation = UnityEngine.Random.rotation;
+        fish.transform.position = transform.position;
     }
 
 }

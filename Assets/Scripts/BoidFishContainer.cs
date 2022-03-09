@@ -7,12 +7,14 @@ using UnityEngine;
 public class BoidFishContainer : FishContainer
 {
     BoidManager boidManager;
+    Collider attatchedCollider;
 
     Dictionary<Fish, Boid> boidDict;
 
     private void Awake()
     {
         boidManager = GetComponent<BoidManager>();
+        attatchedCollider = GetComponent<Collider>();
         boidDict = new Dictionary<Fish, Boid>();
     }
 
@@ -20,6 +22,11 @@ public class BoidFishContainer : FishContainer
     {
         base.Add(fish);
         fish.transform.LookAt(transform);
+        // if the fish is completely submerged, randomize the rotation
+        if (attatchedCollider.bounds.Contains(fish.transform.position + Vector3.one)) 
+        {
+            fish.transform.rotation = Random.rotation;
+        }
         Boid boid = fish.AddBoidComponent();
         boidManager.RegisterBoid(boid);
         boidDict.Add(fish, boid);
