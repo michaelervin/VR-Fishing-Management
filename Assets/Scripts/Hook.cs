@@ -9,11 +9,22 @@ public class Hook : MonoBehaviour
     [SerializeField] float hookChance = 1;
     [SerializeField] GameObject baitPrefab;
 
+    /// <summary>
+    /// The bait attatched to the hook. If there's no bait, this value will be null.
+    /// </summary>
+    GameObject bait;
+
     public void AddBait()
     {
-        GameObject bait = Instantiate(baitPrefab);
-        bait.GetComponent<Follow>().followTransform = transform;
-
+        if(bait == null)
+        {
+            bait = Instantiate(baitPrefab);
+            bait.GetComponent<Follow>().followTransform = transform;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add bait when there's already bait");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

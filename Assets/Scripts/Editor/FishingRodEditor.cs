@@ -21,5 +21,9 @@ public class FishingRodEditor : Editor
         {
             fishingRod.StartCoroutine(fishingRod.ReelBobber());
         }
+        if (GUILayout.Button("Set Bait"))
+        {
+            fishingRod.SetBait();
+        }
     }
 }

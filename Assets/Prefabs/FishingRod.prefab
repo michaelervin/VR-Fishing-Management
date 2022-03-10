@@ -192,8 +192,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tip: {fileID: 2883652798732558451}
   bobber: {fileID: 576931552321870263}
+  hook: {fileID: 534603139201365832}
   castForce: 500
-  reelSpeed: 1
+  reelTime: 1
 --- !u!1001 &3364606507981532218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,6 +395,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8688564319089273675, guid: 34165096745a3ff4aa3456df30c73dcd, type: 3}
   m_PrefabInstance: {fileID: 9221315461165407236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &534603139201365832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8688564319089273676, guid: 34165096745a3ff4aa3456df30c73dcd, type: 3}
+  m_PrefabInstance: {fileID: 9221315461165407236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534603139201365838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27661952e8d346d4c8f0d8d8f8562fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &2853772809198322116
 LineRenderer:
   m_ObjectHideFlags: 0
