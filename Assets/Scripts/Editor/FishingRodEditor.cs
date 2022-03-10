@@ -19,7 +19,7 @@ public class FishingRodEditor : Editor
         }
         if (GUILayout.Button("Reel Bobber"))
         {
-            fishingRod.StartCoroutine(fishingRod.ReelBobber());
+            fishingRod.ReelBobber();
         }
         if (GUILayout.Button("Set Bait"))
         {

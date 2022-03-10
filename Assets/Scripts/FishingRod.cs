@@ -58,7 +58,12 @@ public class FishingRod : MonoBehaviour
         }
     }
 
-    public IEnumerator ReelBobber()
+    public void ReelBobber()
+    {
+        StartCoroutine(ReelBobberCoroutine());
+    }
+
+    private IEnumerator ReelBobberCoroutine()
     {
         isReeling = true;
         bobber.useGravity = false;
