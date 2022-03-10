@@ -94,6 +94,9 @@ public class Fish : MonoBehaviour
         rb.isKinematic = true;
     }
 
+    /// <summary>
+    /// Removes fish from hook. TODO: this function is not sufficient on it's own. You must also detatch the hook from the fish (See Hook.cs)
+    /// </summary>
     public void DetachHook()
     {
         attatchedHook = null;

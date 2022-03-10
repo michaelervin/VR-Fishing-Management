@@ -25,5 +25,9 @@ public class FishingRodEditor : Editor
         {
             fishingRod.SetBait();
         }
+        if (GUILayout.Button("Remove Fish"))
+        {
+            fishingRod.RemoveFish();
+        }
     }
 }

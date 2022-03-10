@@ -32,6 +32,18 @@ public class FishingRod : MonoBehaviour
         }
     }
 
+    public void RemoveFish()
+    {
+        if (isReeled)
+        {
+            hook.DetachFish();
+        }
+        else
+        {
+            Debug.LogWarning("Tried to remove fish while not reeled");
+        }
+    }
+
     public void LaunchBobber()
     {
         if (!isReeling)

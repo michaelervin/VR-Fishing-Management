@@ -32,6 +32,12 @@ public class Hook : MonoBehaviour
         }
     }
 
+    public void DetachFish()
+    {
+        attachedFish.DetachHook();
+        attachedFish = null;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == attachedFish?.gameObject) return;
