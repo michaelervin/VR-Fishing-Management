@@ -70,6 +70,20 @@ public class Fish : MonoBehaviour
         }
     }
 
+    public IEnumerator TugBobber(Rigidbody bobber)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            bobber.AddForce(Vector3.down * 300);
+            yield return new WaitForSeconds(1);
+            if (container == null)
+            {
+                yield break;
+            }
+        }
+        DetachHook();
+    }
+
     public void AttachHook(Hook hook)
     {
         attatchedHook = hook;
