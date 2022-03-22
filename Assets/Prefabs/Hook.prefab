@@ -158,3 +158,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hookChance: 1
   baitPrefab: {fileID: 3344591980247955264, guid: 053b91261bf89ab439f5e9102a8075c1, type: 3}
+  bobber: {fileID: 0}

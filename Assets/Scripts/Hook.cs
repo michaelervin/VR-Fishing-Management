@@ -24,7 +24,20 @@ public class Hook : MonoBehaviour
         if(bait == null)
         {
             bait = Instantiate(baitPrefab);
-            bait.GetComponent<Follow>().followTransform = transform;
+            bait.AddComponent<Follow>().followTransform = transform;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add bait when there's already bait");
+        }
+    }
+
+    public void AddBait(GameObject bait)
+    {
+        if (bait == null)
+        {
+            this.bait = bait;
+            bait.AddComponent<Follow>().followTransform = transform;
         }
         else
         {
