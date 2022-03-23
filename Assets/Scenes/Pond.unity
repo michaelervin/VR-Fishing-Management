@@ -1497,6 +1497,10 @@ PrefabInstance:
       propertyPath: baitPrefab
       value: 
       objectReference: {fileID: 1005858347}
+    - target: {fileID: 534603139201365832, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
+      propertyPath: fishingBellSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c50449333300ccc489052c8749bcfd0e, type: 3}
     - target: {fileID: 534603139201365838, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1504,6 +1508,22 @@ PrefabInstance:
     - target: {fileID: 534603139201365839, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748066737252648985, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748066737252648985, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748066737252648985, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748066737252648985, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.141
       objectReference: {fileID: 0}
     - target: {fileID: 3428426067939943367, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
       propertyPath: m_Layer
@@ -1516,6 +1536,10 @@ PrefabInstance:
     - target: {fileID: 5127715903289673266, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
       propertyPath: offset.y
       value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447190734396525176, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.611
       objectReference: {fileID: 0}
     - target: {fileID: 6578112952451515921, guid: 34655a29a653b2340984c16c3d3edcc5, type: 3}
       propertyPath: m_LocalScale.x

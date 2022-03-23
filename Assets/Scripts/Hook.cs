@@ -10,6 +10,8 @@ public class Hook : MonoBehaviour
     [SerializeField] GameObject baitPrefab;
     [SerializeField] Rigidbody bobber;
 
+    public AudioClip fishingBellSound;
+
     /// <summary>
     /// The bait attatched to the hook. If there's no bait, this value will be null.
     /// </summary>
@@ -63,6 +65,7 @@ public class Hook : MonoBehaviour
                 fish.AttachHook(this);
                 attachedFish = fish;
                 StartCoroutine(fish.TugBobber(bobber));
+                AudioSource.PlayClipAtPoint(fishingBellSound, transform.position);
             }
         }
     }
