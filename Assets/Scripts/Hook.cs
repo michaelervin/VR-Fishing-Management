@@ -10,6 +10,8 @@ public class Hook : MonoBehaviour
     [SerializeField] GameObject baitPrefab;
     [SerializeField] Rigidbody bobber;
 
+    public AudioClip fishingBellSound;
+
     /// <summary>
     /// The bait attatched to the hook. If there's no bait, this value will be null.
     /// </summary>
@@ -24,7 +26,20 @@ public class Hook : MonoBehaviour
         if(bait == null)
         {
             bait = Instantiate(baitPrefab);
-            bait.GetComponent<Follow>().followTransform = transform;
+            bait.AddComponent<Follow>().followTransform = transform;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add bait when there's already bait");
+        }
+    }
+
+    public void AddBait(GameObject bait)
+    {
+        if (bait == null)
+        {
+            this.bait = bait;
+            bait.AddComponent<Follow>().followTransform = transform;
         }
         else
         {
@@ -50,6 +65,7 @@ public class Hook : MonoBehaviour
                 fish.AttachHook(this);
                 attachedFish = fish;
                 StartCoroutine(fish.TugBobber(bobber));
+                AudioSource.PlayClipAtPoint(fishingBellSound, transform.position);
             }
         }
     }
