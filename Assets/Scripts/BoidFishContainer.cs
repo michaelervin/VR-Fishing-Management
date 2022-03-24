@@ -11,8 +11,9 @@ public class BoidFishContainer : FishContainer
 
     Dictionary<Fish, Boid> boidDict;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         boidManager = GetComponent<BoidManager>();
         attatchedCollider = GetComponent<Collider>();
         boidDict = new Dictionary<Fish, Boid>();

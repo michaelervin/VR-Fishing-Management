@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,10 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e0e63624b9f3c4097033fbd5bd9813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7397472504475426699, guid: a50b037309df8674abbb0f965bf427dd, type: 3}
+  fishData:
+    name: Fish
+    nickName: Fred
+    size: 1
   container: {fileID: 1222660234}
   spawnOnStartCount: 5
   spawnTimeIncrement: 2
+  spawnTimeOffset: 0.5
 --- !u!4 &164349616
 Transform:
   m_ObjectHideFlags: 0
@@ -1209,12 +1213,33 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 466211506190226227, guid: 1b454c43542d06f429308aac14af4565, type: 3}
   m_PrefabInstance: {fileID: 1222660233}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1222660235}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c36068b6e3e0c043a7f9ae983d7915e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1222660235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2979003930999231217, guid: 1b454c43542d06f429308aac14af4565, type: 3}
+  m_PrefabInstance: {fileID: 1222660233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1222660236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222660235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587823edd226e1b4395ebbb499dc38f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScript: {fileID: 1222660234}
+  savePath: PondData.json
+  loadOnStart: 1
+  saveOnDestroy: 1
 --- !u!1 &1245780982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,10 +1364,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e0e63624b9f3c4097033fbd5bd9813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7397472504475426699, guid: a50b037309df8674abbb0f965bf427dd, type: 3}
+  fishData:
+    name: Fish
+    nickName: George
+    size: 0.5
   container: {fileID: 1222660234}
   spawnOnStartCount: 5
   spawnTimeIncrement: 2
+  spawnTimeOffset: 0
 --- !u!4 &1323619907
 Transform:
   m_ObjectHideFlags: 0
@@ -1690,10 +1719,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e0e63624b9f3c4097033fbd5bd9813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7397472504475426699, guid: a50b037309df8674abbb0f965bf427dd, type: 3}
+  fishData:
+    name: Fish
+    nickName: Fynn
+    size: 0.7
   container: {fileID: 1222660234}
   spawnOnStartCount: 5
   spawnTimeIncrement: 2
+  spawnTimeOffset: 1
 --- !u!4 &1662980705
 Transform:
   m_ObjectHideFlags: 0

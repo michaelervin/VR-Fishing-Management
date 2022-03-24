@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu()]
-public class FishData : ScriptableObject
+[System.Serializable]
+public class FishData
 {
-    public string description;
+    public string name;
+    public string nickName;
     public float size;
-
-    public List<FishFood> acceptableFood;
 }

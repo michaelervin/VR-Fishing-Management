@@ -1,25 +1,37 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Utility behavior for spawning fish via the inspector.
+/// </summary>
 public class FishSpawner : MonoBehaviour
 {
     [SerializeField]
-    Fish prefab;
+    FishData fishData;
     [SerializeField]
     BoidFishContainer container;
     [SerializeField]
     int spawnOnStartCount = 5;
     [SerializeField]
     float spawnTimeIncrement = 1f;
+    [SerializeField]
+    float spawnTimeOffset = 0.5f;
 
     private IEnumerator Start()
     {
-        for(int i=0; i<spawnOnStartCount; i++)
+        yield return new WaitForSeconds(spawnTimeOffset);
+        for (int i = 0; i < spawnOnStartCount; i++)
         {
-            SpawnFish();
             yield return new WaitForSeconds(spawnTimeIncrement);
+            if (container.usedCapacity + fishData.size <= container.capacity)
+            {
+                SpawnFish();
+            }
+            else
+            {
+                Debug.LogWarning("Attempted to spawn fish in full container, skipping...");
+            }
         }
     }
 
@@ -27,11 +39,11 @@ public class FishSpawner : MonoBehaviour
     {
         try
         {
-            Fish fish = container[0];
+            Fish fish = container.fish[0];
             container.Remove(fish);
             Destroy(fish.gameObject);
         }
-        catch (ArgumentOutOfRangeException)
+        catch (System.ArgumentOutOfRangeException)
         {
             Debug.Log("There's no fish in this container!");
         }
@@ -39,8 +51,23 @@ public class FishSpawner : MonoBehaviour
 
     public void SpawnFish()
     {
-        Fish fish = Instantiate(prefab);
+        Fish fish = FishSpawnerUtility.CreateFish(fishData);
         fish.transform.position = transform.position;
     }
+}
 
+public static class FishSpawnerUtility
+{
+    static GameObject _fishPrefab;
+    static GameObject FishPrefab
+    {
+        get => _fishPrefab == null ? Resources.Load<GameObject>("Prefabs/Fish") : _fishPrefab;
+    }
+
+    public static Fish CreateFish(FishData data)
+    {
+        Fish fish = Object.Instantiate(FishPrefab).GetComponent<Fish>();
+        fish.data = data;
+        return fish;
+    }
 }
