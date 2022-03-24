@@ -21,7 +21,6 @@ public class Hook : MonoBehaviour
     /// </summary>
     Fish attachedFish;
 
-    public void AddBait()
     public bool AddBait()
     {
         if(bait == null)
