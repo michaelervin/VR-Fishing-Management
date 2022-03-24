@@ -7,7 +7,6 @@ public class Fish : MonoBehaviour
 {
     public FishData data;
 
-    [HideInInspector]
     public FishContainer container;
 
     /// <summary>
