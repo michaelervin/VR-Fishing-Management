@@ -8,17 +8,15 @@ public class BaitSpawner : MonoBehaviour
 
     public int baitsAvailable = 2;
 
-    private void Start()
-    {
-        Instantiate(bait).transform.position = transform.position;
-        
-    }
-    public void Spawn()
+    public GameObject Spawn()
     {
         if (baitsAvailable != 0)
         {
-            Instantiate(bait);
+            var spawnedBait =  Instantiate(bait);
             baitsAvailable = baitsAvailable -= 1;
+            bait.transform.position = transform.position;
+            return spawnedBait;
         }
+        return null;
     }
 }
