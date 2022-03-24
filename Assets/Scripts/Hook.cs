@@ -22,28 +22,33 @@ public class Hook : MonoBehaviour
     Fish attachedFish;
 
     public void AddBait()
+    public bool AddBait()
     {
         if(bait == null)
         {
             bait = Instantiate(baitPrefab);
             bait.AddComponent<Follow>().followTransform = transform;
+            return true;
         }
         else
         {
             Debug.LogWarning("Tried to add bait when there's already bait");
+            return false;
         }
     }
 
-    public void AddBait(GameObject bait)
+    public bool AddBait(GameObject bait)
     {
         if (bait == null)
         {
             this.bait = bait;
             bait.AddComponent<Follow>().followTransform = transform;
+            return true;
         }
         else
         {
             Debug.LogWarning("Tried to add bait when there's already bait");
+            return false;
         }
     }
 
