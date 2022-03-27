@@ -66,6 +66,7 @@ public class Fish : MonoBehaviour
         {
             container.Remove(this);
             rb.useGravity = true;
+            rb.isKinematic = false;
         }
     }
 
