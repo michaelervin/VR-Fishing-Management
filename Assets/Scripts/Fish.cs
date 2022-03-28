@@ -7,7 +7,6 @@ public class Fish : MonoBehaviour
 {
     public FishData data;
 
-    [HideInInspector]
     public FishContainer container;
 
     /// <summary>
@@ -67,6 +66,7 @@ public class Fish : MonoBehaviour
         {
             container.Remove(this);
             rb.useGravity = true;
+            rb.isKinematic = false;
         }
     }
 
