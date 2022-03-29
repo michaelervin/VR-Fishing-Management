@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 3518742415560995789}
   - component: {fileID: 9179342769271800373}
   - component: {fileID: 5224318149965125614}
+  - component: {fileID: 4252585831075853179}
   m_Layer: 0
   m_Name: FishContainer
   m_TagString: Untagged
@@ -583,6 +584,22 @@ MonoBehaviour:
   usedCapacity: 0
   fishData: []
   fish: []
+--- !u!114 &4252585831075853179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6777743839228718950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587823edd226e1b4395ebbb499dc38f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScript: {fileID: 5224318149965125614}
+  savePath: Bucket.json
+  loadOnStart: 1
+  saveOnDestroy: 1
 --- !u!1 &9103832011951353197
 GameObject:
   m_ObjectHideFlags: 0
