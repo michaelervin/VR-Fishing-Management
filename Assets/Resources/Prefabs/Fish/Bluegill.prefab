@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6162552544928328069}
   m_Layer: 0
-  m_Name: BluegillPrefab
+  m_Name: Bluegill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

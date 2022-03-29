@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410880647927330247}
   m_Layer: 0
-  m_Name: YellowPerchPrefab
+  m_Name: Yellow Perch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
