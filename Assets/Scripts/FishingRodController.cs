@@ -21,14 +21,14 @@ public class FishingRodController : MonoBehaviour
 
     private void HandHoverUpdate(Hand hand)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        GrabTypes startingGrabType = hand.GetGrabStarting();
+        if (startingGrabType == GrabTypes.Pinch)
         {
             hand.DetachObject(this.gameObject);
             hand.HoverUnlock(interactable);
             return;
         }
 
-        GrabTypes startingGrabType = hand.GetGrabStarting();
         bool isGrabEnding = hand.IsGrabEnding(this.gameObject);
 
         if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
