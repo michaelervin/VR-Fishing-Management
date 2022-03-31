@@ -7,7 +7,6 @@ public class FishingRod : MonoBehaviour
     [SerializeField] VelocityTracker tip;
     [SerializeField] Rigidbody bobber;
     [SerializeField] Hook hook;
-    [SerializeField] float castForce = 500;
     [SerializeField] float reelTime = 1;
 
     bool isReeling;
@@ -18,6 +17,14 @@ public class FishingRod : MonoBehaviour
         bobber.useGravity = false;
         isReeling = false;
         isReeled = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isReeled)
+        {
+            bobber.MovePosition(tip.transform.position);
+        }
     }
 
     public void SetBait()
@@ -60,7 +67,10 @@ public class FishingRod : MonoBehaviour
 
     public void ReelBobber()
     {
-        StartCoroutine(ReelBobberCoroutine());
+        if (!isReeled)
+        {
+            StartCoroutine(ReelBobberCoroutine());
+        }
     }
 
     private IEnumerator ReelBobberCoroutine()

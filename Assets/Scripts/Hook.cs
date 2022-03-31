@@ -19,7 +19,7 @@ public class Hook : MonoBehaviour
     /// <summary>
     /// the Fish Attatched to the hook. If there's no fish, this value will be null.
     /// </summary>
-    Fish attachedFish;
+    public Fish attachedFish;
 
     public bool AddBait()
     {
@@ -66,10 +66,12 @@ public class Hook : MonoBehaviour
         {
             if (Random.Range(0f, 1f) < hookChance)
             {
-                fish.AttachHook(this);
-                attachedFish = fish;
-                StartCoroutine(fish.TugBobber(bobber));
-                AudioSource.PlayClipAtPoint(fishingBellSound, transform.position);
+                if (fish.AttachHook(this))
+                {
+                    attachedFish = fish;
+                    StartCoroutine(fish.TugBobber(bobber));
+                    AudioSource.PlayClipAtPoint(fishingBellSound, transform.position);
+                }
             }
         }
     }
