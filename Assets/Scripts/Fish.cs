@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Fish : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Fish : MonoBehaviour
     Boid boid;
     Rigidbody rb;
     Hook attatchedHook;
+    bool hookInvulnerability;
 
     private void Start()
     {
@@ -83,21 +85,25 @@ public class Fish : MonoBehaviour
         DetachHook();
     }
 
-    public void AttachHook(Hook hook)
+    public bool AttachHook(Hook hook)
     {
+        if (hookInvulnerability)
+        {
+            Debug.LogWarning("Failed to attach hook: the fish is invulnerable");
+            return false;
+        }
         attatchedHook = hook;
         if (boid != null)
         {
             boid.enabled = false;
         }
         rb.isKinematic = true;
+        return true;
     }
 
-    /// <summary>
-    /// Removes fish from hook. TODO: this function is not sufficient on it's own. You must also detatch the hook from the fish (See Hook.cs)
-    /// </summary>
     public void DetachHook()
     {
+        attatchedHook.attachedFish = null;
         attatchedHook = null;
         transform.position += Vector3.right;
         if (boid != null)
@@ -118,5 +124,27 @@ public class Fish : MonoBehaviour
         }
         Destroy(fishFood.gameObject);
         Debug.Log("Nom");
+    }
+
+    private IEnumerator HookInvulnerability(float seconds)
+    {
+        hookInvulnerability = true;
+        yield return new WaitForSeconds(seconds);
+        hookInvulnerability = false;
+    }
+
+    private void OnAttachedToHand(Hand hand)
+    {
+        if (attatchedHook != null)
+        {
+            DetachHook();
+            StartCoroutine(HookInvulnerability(3));
+        }
+        rb.isKinematic = true;
+    }
+
+    private void OnDetachedFromHand(Hand hand)
+    {
+        rb.isKinematic = false;
     }
 }
