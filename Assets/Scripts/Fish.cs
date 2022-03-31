@@ -44,14 +44,16 @@ public class Fish : MonoBehaviour
         FishContainer container = other.GetComponent<FishContainer>();
         if(container != null)
         {
-            container.Add(this);
-            // Don't enable boid script yet if the fish is still attatched to a hook
-            if(boid != null && attatchedHook != null)
+            if (container.TryAdd(this))
             {
-                boid.enabled = false;
+                // Don't enable boid script yet if the fish is still attatched to a hook
+                if (boid != null && attatchedHook != null)
+                {
+                    boid.enabled = false;
+                }
+                rb.useGravity = false;
+                rb.isKinematic = true;
             }
-            rb.useGravity = false;
-            rb.isKinematic = true;
         }
 
         FishFood fishFood = other.GetComponent<FishFood>();
