@@ -25,17 +25,18 @@ public class FishContainer : MonoBehaviour, ISavable
         return usedCapacity + fish.data.size <= capacity;
     }
 
-    public virtual void Add(Fish fish)
+    public virtual bool TryAdd(Fish fish)
     {
         if(!HasSpace(fish))
         {
-            throw new InvalidOperationException("Could not add fish: the container is full!");
+            return false;
         }
         this.fish.Add(fish);
         fishData.Add(fish.data);
         fish.transform.parent = transform;
         fish.container = this;
         usedCapacity += fish.data.size;
+        return true;
     }
 
     public virtual void Remove(Fish fish)
