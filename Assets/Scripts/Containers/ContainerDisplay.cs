@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IContainable, IDisplayable
 {
     [SerializeField] MonoBehaviour containerScript;
     [SerializeField] float spacing;
+    [SerializeField] Hand hand;
 
     private static ContainerElementDisplay _displayInfoPrefab;
     private static ContainerElementDisplay DisplayInfoPrefab
@@ -49,6 +51,7 @@ public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IConta
             element.Text = info.text;
             element.SpriteImage = info.image;
             element.referenceObject = o.gameObject;
+            element.hand = hand;
             elements.Add(element);
 
             i++;

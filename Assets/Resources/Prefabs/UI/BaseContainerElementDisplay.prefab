@@ -124,19 +124,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3006084830689580169}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: DisableHints
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &3006084830689580171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,10 +195,10 @@ MonoBehaviour:
       - m_Target: {fileID: 9112353384070080063}
         m_TargetAssemblyTypeName: ContainerElementDisplay, Assembly-CSharp
         m_MethodName: Click
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Valve.VR.InteractionSystem.Hand, SteamVR
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -231,6 +219,7 @@ MonoBehaviour:
   image: {fileID: 3006084830689580169}
   text: {fileID: 3006084831948735801}
   uiElement: {fileID: 3006084830689580170}
+  hand: {fileID: 0}
   referenceObject: {fileID: 0}
 --- !u!1 &3006084831893616367
 GameObject:
