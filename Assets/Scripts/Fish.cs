@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Fish : MonoBehaviour
+public class Fish : MonoBehaviour, IContainable
 {
     public FishData data;
 
@@ -17,6 +17,8 @@ public class Fish : MonoBehaviour
     Rigidbody rb;
     Hook attatchedHook;
     bool hookInvulnerability;
+
+    float IContainable.RequiredSpace => data.size;
 
     private void Start()
     {
@@ -148,5 +150,16 @@ public class Fish : MonoBehaviour
     private void OnDetachedFromHand(Hand hand)
     {
         rb.isKinematic = false;
+    }
+
+    void IContainable.Contain<T>(ObjectContainer<T> container)
+    {
+        Debug.Assert(container is FishContainer);
+        this.container = container as FishContainer;
+    }
+
+    void IContainable.Release()
+    {
+        container = null;
     }
 }

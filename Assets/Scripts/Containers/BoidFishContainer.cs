@@ -19,9 +19,9 @@ public class BoidFishContainer : FishContainer
         boidDict = new Dictionary<Fish, Boid>();
     }
 
-    public override bool TryAdd(Fish fish)
+    public override void OnContainerAdd(Fish fish)
     {
-        if (!base.TryAdd(fish)) return false;
+        base.OnContainerAdd(fish);
         fish.transform.LookAt(transform);
         // if the fish is completely submerged, randomize the rotation
         if (attatchedCollider.bounds.Contains(fish.transform.position + Vector3.one)) 
@@ -31,14 +31,13 @@ public class BoidFishContainer : FishContainer
         Boid boid = fish.AddBoidComponent();
         boidManager.RegisterBoid(boid);
         boidDict.Add(fish, boid);
-        return true;
     }
 
-    public override void Remove(Fish fish)
+    public override void OnContainerRemove(Fish fish)
     {
         boidManager.UnregisterBoid(boidDict[fish]);
         Destroy(fish.gameObject.GetComponent<Boid>());
-        base.Remove(fish);
+        base.OnContainerRemove(fish);
 
         boidDict.Remove(fish);
         fish.transform.parent = null;

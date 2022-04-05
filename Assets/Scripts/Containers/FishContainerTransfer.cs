@@ -9,9 +9,9 @@ public class FishContainerTransfer : MonoBehaviour
 
     public void Transfer()
     {
-        while (from.fish.Count > 0)
+        while (from.objects.Count > 0)
         {
-            Fish f = from.fish[0];
+            Fish f = from.objects[0];
             from.Remove(f);
             f.transform.position = to.transform.position;
         }

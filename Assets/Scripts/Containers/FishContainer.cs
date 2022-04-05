@@ -5,47 +5,24 @@ using Unity.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class FishContainer : MonoBehaviour, ISavable
+public class FishContainer : ObjectContainer<Fish>, ISavable
 {
-    public float capacity;
-    public float usedCapacity;
-
     [SerializeField]
     public List<FishData> fishData;
-    public List<Fish> fish;
 
     protected virtual void Awake()
     {
         fishData = new List<FishData>();
-        fish = new List<Fish>();
     }
 
-    public bool HasSpace(Fish fish)
+    public virtual void OnContainerAdd(Fish fish)
     {
-        return usedCapacity + fish.data.size <= capacity;
-    }
-
-    public virtual bool TryAdd(Fish fish)
-    {
-        if(!HasSpace(fish))
-        {
-            return false;
-        }
-        this.fish.Add(fish);
         fishData.Add(fish.data);
-        fish.transform.parent = transform;
-        fish.container = this;
-        usedCapacity += fish.data.size;
-        return true;
     }
 
-    public virtual void Remove(Fish fish)
+    public virtual void OnContainerRemove(Fish fish)
     {
-        this.fish.Remove(fish);
         fishData.Remove(fish.data);
-        fish.transform.parent = null;
-        fish.container = null;
-        usedCapacity -= fish.data.size;
     }
 
     public Type GetSaveDataType()
@@ -62,7 +39,7 @@ public class FishContainer : MonoBehaviour, ISavable
         }
 
         // Arrays will be repopulated on collision with fish
-        fish.Clear();
+        objects.Clear();
         fishData.Clear();
     }
 

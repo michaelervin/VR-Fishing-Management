@@ -39,7 +39,7 @@ public class FishSpawner : MonoBehaviour
     {
         try
         {
-            Fish fish = container.fish[0];
+            Fish fish = container.objects[0];
             container.Remove(fish);
             Destroy(fish.gameObject);
         }
