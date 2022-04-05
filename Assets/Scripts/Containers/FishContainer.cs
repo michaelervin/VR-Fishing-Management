@@ -13,14 +13,16 @@ public class FishContainer : ObjectContainer<Fish>, ISavable
     protected virtual void Awake()
     {
         fishData = new List<FishData>();
+        onAdd += OnContainerAdd;
+        onRemove += OnContainerRemove;
     }
 
-    public virtual void OnContainerAdd(Fish fish)
+    private void OnContainerAdd(Fish fish)
     {
         fishData.Add(fish.data);
     }
 
-    public virtual void OnContainerRemove(Fish fish)
+    private void OnContainerRemove(Fish fish)
     {
         fishData.Remove(fish.data);
     }
