@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Fish : MonoBehaviour, IContainable
+public class Fish : MonoBehaviour, IContainable, IDisplayable
 {
     public FishData data;
 
@@ -161,5 +161,13 @@ public class Fish : MonoBehaviour, IContainable
     void IContainable.Release()
     {
         container = null;
+    }
+
+    DisplayInfo IDisplayable.GetDisplayInfo()
+    {
+        DisplayInfo info = new DisplayInfo();
+        info.text = data.nickName;
+        info.image = FishDatabase.GetSprite(data.name);
+        return info;
     }
 }

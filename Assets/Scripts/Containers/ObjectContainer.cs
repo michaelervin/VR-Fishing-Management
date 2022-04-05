@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContai
     public float usedCapacity;
 
     public List<T> objects = new List<T>();
+
+    public Action<T> onAdd;
+    public Action<T> onRemove;
 
     public bool HasSpace(T o)
     {
@@ -24,7 +28,7 @@ public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContai
         o.transform.parent = transform;
         usedCapacity += o.RequiredSpace;
         o.Contain(this);
-        gameObject.SendMessage("OnContainerAdd", o, SendMessageOptions.DontRequireReceiver);
+        onAdd?.Invoke(o);
         return true;
     }
 
@@ -34,7 +38,7 @@ public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContai
         o.transform.parent = null;
         usedCapacity -= o.RequiredSpace;
         o.Release();
-        gameObject.SendMessage("OnContainerRemove", o);
+        onRemove?.Invoke(o);
     }
 }
 
