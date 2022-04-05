@@ -6,6 +6,12 @@ public class FishContainerDisplay : ContainerDisplay<Fish>
 {
     void Start()
     {
+        container.onAdd += OnContainerUpdate;
+        container.onRemove += OnContainerUpdate;
+    }
+
+    void OnContainerUpdate(Fish f)
+    {
         DisplayObjects();
     }
 }

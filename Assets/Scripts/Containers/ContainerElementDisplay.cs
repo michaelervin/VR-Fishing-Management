@@ -11,6 +11,8 @@ public class ContainerElementDisplay : MonoBehaviour
     [SerializeField] Text text;
     [SerializeField] UIElement uiElement;
 
+    public GameObject referenceObject;
+
     public Sprite SpriteImage
     {
         set => image.sprite = value;
@@ -21,8 +23,10 @@ public class ContainerElementDisplay : MonoBehaviour
         set => text.text = value;
     }
 
-    public void Click()
+    public void Click(Hand hand)
     {
+        referenceObject.transform.position = hand.transform.position;
+        hand.AttachObject(referenceObject, GrabTypes.Grip);
         Debug.Log(text.text);
     }
 }

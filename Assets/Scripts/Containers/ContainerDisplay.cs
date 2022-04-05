@@ -20,7 +20,9 @@ public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IConta
         }
     }
 
-    ObjectContainer<T> container;
+    protected ObjectContainer<T> container;
+
+    private List<ContainerElementDisplay> elements = new List<ContainerElementDisplay>();
 
     private void Awake()
     {
@@ -31,14 +33,23 @@ public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IConta
     public void DisplayObjects()
     {
         int i = 0;
+        // TODO: don't destroy and reinstantiate all objects
+        foreach(var e in elements)
+        {
+            Destroy(e.gameObject);
+        }
+        elements.Clear();
+
         foreach (T o in container.objects)
         {
             DisplayInfo info = o.GetDisplayInfo();
             ContainerElementDisplay element = Instantiate(DisplayInfoPrefab);
             element.transform.SetParent(transform, false);
+            element.transform.localPosition += new Vector3(0, i * spacing, 0);
             element.Text = info.text;
             element.SpriteImage = info.image;
-            element.transform.position += new Vector3(0, i * spacing, 0);
+            element.referenceObject = o.gameObject;
+            elements.Add(element);
 
             i++;
         }
