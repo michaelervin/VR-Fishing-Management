@@ -17,16 +17,20 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     [SerializeField] List<GameObject> luresList;
 
+    [SerializeField] GameObject sellButton;
+    [SerializeField] GameObject buyButton;
+
+
     public int luresListIndex = 0;
 
     void Start()
     {
-        jerryBucks = 3.00;
+        jerryBucks = 10.00;
     }
     // Changes Lure displaye on screen based on luresListIndex
     public void IncreaseIndex()
     {
-        if (luresListIndex < 3)
+        if (luresListIndex < 2)
         {
             luresListIndex++;
         }
@@ -47,6 +51,15 @@ public class BaitOptions : MonoBehaviour, ISavable
             if (i == luresListIndex)
             {
                 luresList[i].SetActive(true);
+                
+                if(jerryBucks >= baitValues[luresListIndex].value)
+                {
+                    EnableBuyButton();
+                }
+                if(jerryBucks < baitValues[luresListIndex].value)
+                {
+                    DisableBuyButton();
+                }
             }
             else
             {
@@ -55,9 +68,19 @@ public class BaitOptions : MonoBehaviour, ISavable
         }
     }
 
+    private void EnableBuyButton()
+    {
+        buyButton.SetActive(true);
+    }
+
+    private void DisableBuyButton()
+    {
+        buyButton.SetActive(false);
+    }
+
     public void Purchasing()
     {
-        if (jerryBucks > 0)
+        if (jerryBucks >= baitValues[luresListIndex].value)
         {
             jerryBucks -= baitValues[luresListIndex].value;
         }
