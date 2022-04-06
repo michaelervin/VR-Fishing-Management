@@ -13,9 +13,9 @@ public class FishContainerDisplayEditor : Editor
         if (!EditorApplication.isPlaying) return;
 
         FishContainerDisplay container = (FishContainerDisplay)target;
-        if (GUILayout.Button("Display Objects"))
+        if (GUILayout.Button("Toggle enabled"))
         {
-            container.DisplayObjects();
+            container.gameObject.SetActive(!container.gameObject.activeInHierarchy);
         }
     }
 }
