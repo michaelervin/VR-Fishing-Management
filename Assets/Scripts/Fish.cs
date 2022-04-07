@@ -43,7 +43,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
 
     private void OnTriggerEnter(Collider other)
     {
-        FishFood fishFood = other.GetComponent<FishFood>();
+        FishTarget fishFood = other.GetComponent<FishTarget>();
         if(fishFood != null)
         {
             Eat(fishFood);
@@ -95,7 +95,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
         }
     }
 
-    private void Eat(FishFood fishFood)
+    private void Eat(FishTarget fishFood)
     {
         if(container is BoidFishContainer)
         {

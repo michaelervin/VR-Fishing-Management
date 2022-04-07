@@ -15,7 +15,7 @@ public class Hook : MonoBehaviour
     /// <summary>
     /// The bait attatched to the hook. If there's no bait, this value will be null.
     /// </summary>
-    GameObject bait;
+    [SerializeField] GameObject bait;
     /// <summary>
     /// the Fish Attatched to the hook. If there's no fish, this value will be null.
     /// </summary>
@@ -36,12 +36,12 @@ public class Hook : MonoBehaviour
         }
     }
 
-    public bool AddBait(GameObject bait)
+    public bool AddBait(FishTarget bait)
     {
-        if (bait == null)
+        if (this.bait == null)
         {
-            this.bait = bait;
-            bait.AddComponent<Follow>().followTransform = transform;
+            this.bait = bait.gameObject;
+            bait.gameObject.AddComponent<Follow>().followTransform = transform;
             return true;
         }
         else

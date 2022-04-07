@@ -28,6 +28,7 @@ public class Follow : MonoBehaviour
     {
         if(rb != null)
         {
+            rb.isKinematic = true;
             rb.MovePosition(followTransform.position + offset);
         }
     }

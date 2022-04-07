@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BaitSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject bait;
+    [SerializeField] private FishTarget bait;
 
-    public GameObject Spawn()
+    public FishTarget Spawn()
     {
         var spawnedBait = Instantiate(bait);
         bait.transform.position = transform.position;
