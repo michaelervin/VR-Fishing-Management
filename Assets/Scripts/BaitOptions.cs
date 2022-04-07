@@ -9,11 +9,20 @@ public class BaitValue
     public string name = "Jerry";
     public double value = 0;
 }
+
+[Serializable]
+public class BaitAmount
+{
+    public string name = "Jerry";
+    public double value = 0;
+}
 public class BaitOptions : MonoBehaviour, ISavable
 {
     [SerializeField] BaitValue[] baitValues;
 
-    [SerializeField] double jerryBucks;
+    public BaitAmount[] baitAmounts;
+
+    public double jerryBucks;
 
     [SerializeField] List<GameObject> luresList;
 
@@ -23,10 +32,6 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     public int luresListIndex = 0;
 
-    void Start()
-    {
-        jerryBucks = 10.00;
-    }
     // Changes Lure displaye on screen based on luresListIndex
     public void IncreaseIndex()
     {
@@ -60,6 +65,14 @@ public class BaitOptions : MonoBehaviour, ISavable
                 {
                     DisableBuyButton();
                 }
+                if (baitAmounts[luresListIndex].value > 0)
+                {
+                    EnableSellButton();
+                }
+                if (baitAmounts[luresListIndex].value == 0)
+                {
+                    DisableSellButton();
+                }
             }
             else
             {
@@ -78,17 +91,30 @@ public class BaitOptions : MonoBehaviour, ISavable
         buyButton.SetActive(false);
     }
 
+    private void EnableSellButton()
+    {
+        sellButton.SetActive(true);
+    }
+
+    private void DisableSellButton()
+    {
+        sellButton.SetActive(false);
+    }
+
     public void Purchasing()
     {
         if (jerryBucks >= baitValues[luresListIndex].value)
         {
             jerryBucks -= baitValues[luresListIndex].value;
         }
+
+        baitAmounts[luresListIndex].value++;
     }
 
     public void Selling()
     {
         jerryBucks += baitValues[luresListIndex].value;
+        baitAmounts[luresListIndex].value--;
     }
 
     Type ISavable.GetSaveDataType()
@@ -104,5 +130,6 @@ public class BaitOptions : MonoBehaviour, ISavable
     class BaitOptionsSaveData: SaveData
     {
         public double jerryBucks;
+        public BaitAmount[] baitAmounts;
     }
 }

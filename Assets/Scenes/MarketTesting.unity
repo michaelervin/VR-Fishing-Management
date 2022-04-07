@@ -2374,7 +2374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a5a88307c117547a9d2b956493472a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jerryBaitValue: 0
 --- !u!1 &965539128
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,7 +3954,14 @@ MonoBehaviour:
     value: 3
   - name: MinnowBait
     value: 3
-  jerryBucks: 0
+  baitAmounts:
+  - name: JerryBait
+    value: 0
+  - name: CrankBait
+    value: 0
+  - name: MinnowBait
+    value: 0
+  jerryBucks: 10
   luresList:
   - {fileID: 914930278}
   - {fileID: 825218982}
