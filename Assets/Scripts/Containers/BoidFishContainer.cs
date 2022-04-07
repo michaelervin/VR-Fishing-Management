@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoidManager))]
-[RequireComponent(typeof(Collider))]
 public class BoidFishContainer : FishContainer
 {
     BoidManager boidManager;

@@ -43,35 +43,10 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
 
     private void OnTriggerEnter(Collider other)
     {
-        FishContainer container = other.GetComponent<FishContainer>();
-        if(container != null)
-        {
-            if (container.TryAdd(this))
-            {
-                // Don't enable boid script yet if the fish is still attatched to a hook
-                if (boid != null && attatchedHook != null)
-                {
-                    boid.enabled = false;
-                }
-                rb.useGravity = false;
-                rb.isKinematic = true;
-            }
-        }
-
         FishFood fishFood = other.GetComponent<FishFood>();
         if(fishFood != null)
         {
             Eat(fishFood);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        FishContainer container = other.GetComponent<FishContainer>();
-        if (container != null)
-        {
-            container.Remove(this);
-            rb.useGravity = true;
         }
     }
 
@@ -156,11 +131,18 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     {
         Debug.Assert(container is FishContainer);
         this.container = container as FishContainer;
+        if (boid != null && attatchedHook != null)
+        {
+            boid.enabled = false;
+        }
+        rb.useGravity = false;
+        rb.isKinematic = true;
     }
 
     void IContainable.Release()
     {
         container = null;
+        rb.useGravity = true;
     }
 
     DisplayInfo IDisplayable.GetDisplayInfo()

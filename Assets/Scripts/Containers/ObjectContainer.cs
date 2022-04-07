@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContainable
 {
     public float capacity;
@@ -39,6 +40,27 @@ public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContai
         usedCapacity -= o.RequiredSpace;
         o.Release();
         onRemove?.Invoke(o);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        T containable = other.GetComponent<T>();
+        if (containable != null)
+        {
+            if (!TryAdd(containable))
+            {
+                Debug.LogWarning("Container has no space!");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        T containable = other.GetComponent<T>();
+        if (containable != null)
+        {
+            Remove(containable);
+        }
     }
 }
 

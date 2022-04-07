@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class FishContainer : ObjectContainer<Fish>, ISavable
 {
     [SerializeField]
