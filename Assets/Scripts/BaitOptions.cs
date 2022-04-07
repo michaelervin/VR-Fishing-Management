@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//These classes are used to store the values for each item in the market
 [Serializable]
 public class BaitValue
 {
@@ -28,6 +29,8 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     [SerializeField] GameObject sellButton;
     [SerializeField] GameObject buyButton;
+    [SerializeField] GameObject leftButton;
+    [SerializeField] GameObject rightButton;
 
 
     public int luresListIndex = 0;
@@ -73,6 +76,22 @@ public class BaitOptions : MonoBehaviour, ISavable
                 {
                     DisableSellButton();
                 }
+                if (luresListIndex > 0)
+                {
+                    EnableLeftButton();
+                }
+                if (luresListIndex == 0)
+                {
+                    DisableLeftButton();
+                }
+                if (luresListIndex < luresList.Count)
+                {
+                    EnableRightButton();
+                }
+                if (luresListIndex == 2)
+                {
+                    DisableRightButton();
+                }
             }
             else
             {
@@ -81,6 +100,7 @@ public class BaitOptions : MonoBehaviour, ISavable
         }
     }
 
+    // These methods manage the buttons
     private void EnableBuyButton()
     {
         buyButton.SetActive(true);
@@ -99,6 +119,26 @@ public class BaitOptions : MonoBehaviour, ISavable
     private void DisableSellButton()
     {
         sellButton.SetActive(false);
+    }
+
+    private void EnableLeftButton()
+    {
+        leftButton.SetActive(true);
+    }
+
+    private void DisableLeftButton()
+    {
+        leftButton.SetActive(false);
+    }
+
+    private void EnableRightButton()
+    {
+        rightButton.SetActive(true);
+    }
+
+    private void DisableRightButton()
+    {
+        rightButton.SetActive(false);
     }
 
     public void Purchasing()
