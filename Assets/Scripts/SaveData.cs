@@ -43,6 +43,10 @@ public class SaveData
         foreach (var field in type.GetFields())
         {
             var targetField = savable.GetType().GetField(field.Name);
+            if(targetField == null)
+            {
+                Debug.LogError($"Field '{field.Name}' does not exist on type {savable.GetType()}");
+            }
             field.SetValue(data, targetField.GetValue(savable));
         }
         File.WriteAllText(Path.Combine(Application.persistentDataPath, path), (data as SaveData).ToJson());

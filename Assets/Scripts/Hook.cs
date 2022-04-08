@@ -15,7 +15,7 @@ public class Hook : MonoBehaviour
     /// <summary>
     /// The bait attatched to the hook. If there's no bait, this value will be null.
     /// </summary>
-    [SerializeField] GameObject bait;
+    [SerializeField] GameObject attachedBait;
     /// <summary>
     /// the Fish Attatched to the hook. If there's no fish, this value will be null.
     /// </summary>
@@ -23,10 +23,10 @@ public class Hook : MonoBehaviour
 
     public bool AddBait()
     {
-        if(bait == null)
+        if(attachedBait == null)
         {
-            bait = Instantiate(baitPrefab);
-            bait.AddComponent<Follow>().followTransform = transform;
+            attachedBait = Instantiate(baitPrefab);
+            attachedBait.AddComponent<Follow>().followTransform = transform;
             return true;
         }
         else
@@ -38,9 +38,9 @@ public class Hook : MonoBehaviour
 
     public bool AddBait(FishTarget bait)
     {
-        if (this.bait == null)
+        if (attachedBait == null)
         {
-            this.bait = bait.gameObject;
+            attachedBait = bait.gameObject;
             bait.gameObject.AddComponent<Follow>().followTransform = transform;
             return true;
         }
@@ -60,6 +60,7 @@ public class Hook : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == attachedFish?.gameObject) return;
+        if (other.gameObject == attachedBait?.gameObject) return;
 
         Fish fish = other.GetComponent<Fish>();
         if (fish != null)
@@ -73,6 +74,12 @@ public class Hook : MonoBehaviour
                     AudioSource.PlayClipAtPoint(fishingBellSound, transform.position);
                 }
             }
+        }
+
+        FishTarget bait = other.GetComponent<FishTarget>();
+        if (bait != null)
+        {
+            AddBait(bait);
         }
     }
 }
