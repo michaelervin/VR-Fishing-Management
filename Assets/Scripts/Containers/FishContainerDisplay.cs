@@ -4,14 +4,5 @@ using UnityEngine;
 
 public class FishContainerDisplay : ContainerDisplay<Fish>
 {
-    void Start()
-    {
-        container.onAdd += OnContainerUpdate;
-        container.onRemove += OnContainerUpdate;
-    }
-
-    void OnContainerUpdate(Fish f)
-    {
-        DisplayObjects();
-    }
+    // intentionally left blank (so it can be attached to a gameObject)
 }

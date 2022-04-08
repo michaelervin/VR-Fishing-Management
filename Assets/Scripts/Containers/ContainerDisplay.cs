@@ -32,6 +32,17 @@ public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IConta
         container = containerScript as ObjectContainer<T>;
     }
 
+    void Start()
+    {
+        container.onAdd += OnContainerUpdate;
+        container.onRemove += OnContainerUpdate;
+    }
+
+    void OnContainerUpdate(T f)
+    {
+        DisplayObjects();
+    }
+
     public void DisplayObjects()
     {
         int i = 0;
