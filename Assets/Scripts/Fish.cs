@@ -30,6 +30,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     public Boid AddBoidComponent()
     {
         Boid b = gameObject.AddComponent<Boid>();
+        b.pursuedTargetTypes = staticData.targetTypes;
         boid = b;
         return b;
     }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Bluegill
   m_EditorClassIdentifier: 
-  targetTypes: 
+  targetTypes: 03000000

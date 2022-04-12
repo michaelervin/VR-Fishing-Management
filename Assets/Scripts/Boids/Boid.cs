@@ -29,6 +29,8 @@ public class Boid : MonoBehaviour {
     Transform cachedTransform;
     List<FishTarget> targets;
 
+    public List<FishTargetType> pursuedTargetTypes;
+
     Rigidbody rb;
 
     void Awake () {
@@ -59,17 +61,26 @@ public class Boid : MonoBehaviour {
 
     public void AddTarget (FishTarget target)
     {
-        targets.Add(target);
+        if (pursuedTargetTypes.Contains(target.type))
+        {
+            targets.Add(target);
+        }
     }
 
     public void AddTargets (IEnumerable<FishTarget> targets)
     {
-        this.targets.AddRange(targets);
+        foreach (FishTarget target in targets)
+        {
+            AddTarget(target);
+        }
     }
 
     public void RemoveTarget (FishTarget target)
     {
-        targets.Remove(target);
+        if (pursuedTargetTypes.Contains(target.type))
+        {
+            targets.Remove(target);
+        }
     }
 
     public void SetColour (Color col) {

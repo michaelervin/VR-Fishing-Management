@@ -33,7 +33,10 @@ public class BoidManager : MonoBehaviour {
     {
         foreach(Boid b in boids)
         {
-            b.AddTarget(target);
+            if (b.pursuedTargetTypes.Contains(target.type))
+            {
+                b.AddTarget(target);
+            }
         }
         targets.Add(target);
     }
@@ -42,7 +45,10 @@ public class BoidManager : MonoBehaviour {
     {
         foreach (Boid b in boids)
         {
-            b.RemoveTarget(target);
+            if (b.pursuedTargetTypes.Contains(target.type))
+            {
+                b.RemoveTarget(target);
+            }
         }
         targets.Remove(target);
     }
