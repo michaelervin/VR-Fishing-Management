@@ -29,7 +29,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
         BoidFishContainer container = other.GetComponent<BoidFishContainer>();
         if (container != null)
         {
-            container.Add(transform);
+            container.Add(this);
         }
     }
 
@@ -38,7 +38,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
         BoidFishContainer container = other.GetComponent<BoidFishContainer>();
         if (container != null)
         {
-            container.Remove(transform);
+            container.Remove(this);
         }
     }
 

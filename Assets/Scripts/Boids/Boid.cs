@@ -27,7 +27,7 @@ public class Boid : MonoBehaviour {
     // Cached
     Material material;
     Transform cachedTransform;
-    List<Transform> targets;
+    List<FishTarget> targets;
 
     Rigidbody rb;
 
@@ -36,7 +36,7 @@ public class Boid : MonoBehaviour {
         cachedTransform = new GameObject("Heading").transform;
         cachedTransform.position = transform.position;
         rb = GetComponent<Rigidbody>();
-        targets = new List<Transform>();
+        targets = new List<FishTarget>();
     }
 
     private void OnDestroy()
@@ -57,17 +57,17 @@ public class Boid : MonoBehaviour {
         velocity = transform.forward * startSpeed;
     }
 
-    public void AddTarget (Transform target)
+    public void AddTarget (FishTarget target)
     {
         targets.Add(target);
     }
 
-    public void AddTargets (IEnumerable<Transform> targets)
+    public void AddTargets (IEnumerable<FishTarget> targets)
     {
         this.targets.AddRange(targets);
     }
 
-    public void RemoveTarget (Transform target)
+    public void RemoveTarget (FishTarget target)
     {
         targets.Remove(target);
     }
@@ -100,9 +100,9 @@ public class Boid : MonoBehaviour {
         Vector3 acceleration = Vector3.zero;
 
         Vector3 closestTargetOffset = Vector3.one * settings.targetRadius;
-        foreach(Transform target in targets)
+        foreach(FishTarget target in targets)
         {
-            Vector3 offsetToTarget = (target.position - position);
+            Vector3 offsetToTarget = (target.transform.position - position);
             if (offsetToTarget.sqrMagnitude < closestTargetOffset.sqrMagnitude)
                 closestTargetOffset = offsetToTarget;
         }
