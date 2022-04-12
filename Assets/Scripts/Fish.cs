@@ -7,6 +7,7 @@ using Valve.VR.InteractionSystem;
 public class Fish : MonoBehaviour, IContainable, IDisplayable
 {
     public FishData data;
+    public FishStaticData staticData;
 
     public FishContainer container;
 

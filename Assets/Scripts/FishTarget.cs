@@ -58,6 +58,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
 
 public enum FishTargetType
 {
+    Unknown,
     Insect,
     SmallFish,
     Worms,
