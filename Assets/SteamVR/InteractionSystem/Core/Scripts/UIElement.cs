@@ -51,6 +51,17 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         protected virtual void HandHoverUpdate( Hand hand )
 		{
+			// Added code for fallback controls
+            if (hand.noSteamVRFallbackCamera)
+			{
+				if (hand.GetGrabStarting() != GrabTypes.None)
+				{
+					InputModule.instance.Submit(gameObject);
+					ControllerButtonHints.HideButtonHint(hand, hand.uiInteractAction);
+				}
+				return;
+			}
+			//
 			if ( hand.uiInteractAction != null && hand.uiInteractAction.GetStateDown(hand.handType) )
 			{
 				InputModule.instance.Submit( gameObject );

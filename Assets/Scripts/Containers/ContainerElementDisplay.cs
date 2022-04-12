@@ -12,7 +12,7 @@ public class ContainerElementDisplay : MonoBehaviour
     [SerializeField] UIElement uiElement;
 
     Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
-    public Hand hand;
+    [HideInInspector] 
     public GameObject referenceObject;
 
     public Sprite SpriteImage
@@ -25,11 +25,9 @@ public class ContainerElementDisplay : MonoBehaviour
         set => text.text = value;
     }
 
-    public void Click()
+    public void Click(Hand hand)
     {
-        Debug.Log(text.text);
         referenceObject.transform.position = hand.transform.position;
         hand.AttachObject(referenceObject, hand.GetBestGrabbingType(), attachmentFlags);
-        Debug.Log(text.text);
     }
 }
