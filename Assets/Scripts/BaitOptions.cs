@@ -23,7 +23,7 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     public BaitAmount[] baitAmounts;
 
-    public double jerryBucks;
+    public JerryBank jerryBucksAmount;
 
     [SerializeField] List<GameObject> luresList;
 
@@ -60,11 +60,11 @@ public class BaitOptions : MonoBehaviour, ISavable
             {
                 luresList[i].SetActive(true);
                 
-                if(jerryBucks >= baitValues[luresListIndex].value)
+                if(jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
                 {
                     EnableBuyButton();
                 }
-                if(jerryBucks < baitValues[luresListIndex].value)
+                if(jerryBucksAmount.jerryBucks < baitValues[luresListIndex].value)
                 {
                     DisableBuyButton();
                 }
@@ -143,9 +143,9 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     public void Purchasing()
     {
-        if (jerryBucks >= baitValues[luresListIndex].value)
+        if (jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
         {
-            jerryBucks -= baitValues[luresListIndex].value;
+            jerryBucksAmount.jerryBucks -= baitValues[luresListIndex].value;
         }
 
         baitAmounts[luresListIndex].value++;
@@ -153,7 +153,7 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     public void Selling()
     {
-        jerryBucks += baitValues[luresListIndex].value;
+        jerryBucksAmount.jerryBucks += baitValues[luresListIndex].value;
         baitAmounts[luresListIndex].value--;
     }
 
@@ -169,7 +169,6 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     class BaitOptionsSaveData: SaveData
     {
-        public double jerryBucks;
         public BaitAmount[] baitAmounts;
     }
 }

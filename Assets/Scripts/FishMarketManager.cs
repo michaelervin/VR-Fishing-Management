@@ -31,7 +31,7 @@ public class FishMarketManager : MonoBehaviour, ISavable
 
     public FishAmount[] fishAmounts;
 
-    public double jerryBucks;
+    public JerryBank jerryBucksAmount;
 
     [SerializeField] List<GameObject> fishList;
 
@@ -68,11 +68,11 @@ public class FishMarketManager : MonoBehaviour, ISavable
             {
                 fishList[i].SetActive(true);
 
-                if (jerryBucks >= fishBuyValues[fishListIndex].value)
+                if (jerryBucksAmount.jerryBucks >= fishBuyValues[fishListIndex].value)
                 {
                     EnableBuyButton();
                 }
-                if (jerryBucks < fishBuyValues[fishListIndex].value)
+                if (jerryBucksAmount.jerryBucks < fishBuyValues[fishListIndex].value)
                 {
                     DisableBuyButton();
                 }
@@ -151,9 +151,9 @@ public class FishMarketManager : MonoBehaviour, ISavable
 
     public void Purchasing()
     {
-        if (jerryBucks >= fishBuyValues[fishListIndex].value)
+        if (jerryBucksAmount.jerryBucks >= fishBuyValues[fishListIndex].value)
         {
-            jerryBucks -= fishBuyValues[fishListIndex].value;
+            jerryBucksAmount.jerryBucks -= fishBuyValues[fishListIndex].value;
         }
 
         fishAmounts[fishListIndex].value++;
@@ -161,7 +161,7 @@ public class FishMarketManager : MonoBehaviour, ISavable
 
     public void Selling()
     {
-        jerryBucks += fishSellValues[fishListIndex].value;
+        jerryBucksAmount.jerryBucks += fishSellValues[fishListIndex].value;
         fishAmounts[fishListIndex].value--;
     }
 
@@ -177,7 +177,6 @@ public class FishMarketManager : MonoBehaviour, ISavable
 
     class FishMarketSaveData : SaveData
     {
-        public double jerryBucks;
         public FishAmount[] fishAmounts;
     }
 }
