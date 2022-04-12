@@ -7,6 +7,7 @@ using Valve.VR.InteractionSystem;
 public class Fish : MonoBehaviour, IContainable, IDisplayable
 {
     public FishData data;
+    public FishStaticData staticData;
 
     public FishContainer container;
 
@@ -29,6 +30,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     public Boid AddBoidComponent()
     {
         Boid b = gameObject.AddComponent<Boid>();
+        b.pursuedTargetTypes = staticData.targetTypes;
         boid = b;
         return b;
     }
@@ -44,7 +46,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     private void OnTriggerEnter(Collider other)
     {
         FishTarget fishFood = other.GetComponent<FishTarget>();
-        if(fishFood != null)
+        if(fishFood != null && staticData.targetTypes.Contains(fishFood.type))
         {
             Eat(fishFood);
         }
@@ -99,7 +101,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     {
         if(container is BoidFishContainer)
         {
-            ((BoidFishContainer)container).Remove(fishFood.transform);
+            ((BoidFishContainer)container).Remove(fishFood);
         }
         Destroy(fishFood.gameObject);
         Debug.Log("Nom");

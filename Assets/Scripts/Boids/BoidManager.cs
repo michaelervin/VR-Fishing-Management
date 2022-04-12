@@ -8,12 +8,12 @@ public class BoidManager : MonoBehaviour {
 
     public BoidSettings settings;
     public ComputeShader compute;
-    List<Transform> targets;
+    List<FishTarget> targets;
     List<Boid> boids;
 
     public void Awake()
     {
-        targets = new List<Transform>();
+        targets = new List<FishTarget>();
         boids = new List<Boid>();
     }
 
@@ -29,20 +29,26 @@ public class BoidManager : MonoBehaviour {
         boids.Remove(boid);
     }
 
-    public void RegisterTarget(Transform target)
+    public void RegisterTarget(FishTarget target)
     {
         foreach(Boid b in boids)
         {
-            b.AddTarget(target);
+            if (b.pursuedTargetTypes.Contains(target.type))
+            {
+                b.AddTarget(target);
+            }
         }
         targets.Add(target);
     }
 
-    public void UnregisterTarget(Transform target)
+    public void UnregisterTarget(FishTarget target)
     {
         foreach (Boid b in boids)
         {
-            b.RemoveTarget(target);
+            if (b.pursuedTargetTypes.Contains(target.type))
+            {
+                b.RemoveTarget(target);
+            }
         }
         targets.Remove(target);
     }
@@ -109,9 +115,9 @@ public class BoidManager : MonoBehaviour {
     {
         if(targets != null)
         {
-            foreach (Transform target in targets)
+            foreach (FishTarget target in targets)
             {
-                Gizmos.DrawWireSphere(target.position, settings.targetRadius);
+                Gizmos.DrawWireSphere(target.transform.position, settings.targetRadius);
             }
         }
     }

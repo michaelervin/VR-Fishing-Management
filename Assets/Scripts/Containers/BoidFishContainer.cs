@@ -42,12 +42,12 @@ public class BoidFishContainer : FishContainer
         fish.transform.parent = null;
     }
 
-    public void Add(Transform target)
+    public void Add(FishTarget target)
     {
         boidManager.RegisterTarget(target);
     }
 
-    public void Remove(Transform target)
+    public void Remove(FishTarget target)
     {
         boidManager.UnregisterTarget(target);
     }

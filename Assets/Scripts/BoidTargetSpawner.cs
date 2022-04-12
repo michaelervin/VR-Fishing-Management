@@ -11,11 +11,16 @@ public class BoidTargetSpawner : MonoBehaviour
     [SerializeField]
     GameObject target;
 
+    private void Awake()
+    {
+        Debug.LogWarning("TODO: Fix me!!!");
+    }
+
     public void DespawnTarget()
     {
         if (target)
         {
-            container.Remove(target.transform);
+            // container.Remove(target.transform);
             Destroy(target);
         }
         else
@@ -27,6 +32,6 @@ public class BoidTargetSpawner : MonoBehaviour
     public void SpawnTarget()
     {
         target = new GameObject("Target");
-        container.Add(target.transform);
+        // container.Add(target.transform);
     }
 }

@@ -12,9 +12,16 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
 
     [HideInInspector] public Rigidbody rb;
 
+    BoidFishContainer container;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnDestroy()
+    {
+        container?.Remove(this);
     }
 
     void IContainable.Contain<T>(ObjectContainer<T> container)
@@ -29,7 +36,8 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
         BoidFishContainer container = other.GetComponent<BoidFishContainer>();
         if (container != null)
         {
-            container.Add(transform);
+            this.container = container;
+            container.Add(this);
         }
     }
 
@@ -38,7 +46,8 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
         BoidFishContainer container = other.GetComponent<BoidFishContainer>();
         if (container != null)
         {
-            container.Remove(transform);
+            this.container = null;
+            container.Remove(this);
         }
     }
 
@@ -58,6 +67,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
 
 public enum FishTargetType
 {
+    Unknown,
     Insect,
     SmallFish,
     Worms,
