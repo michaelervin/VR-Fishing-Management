@@ -4,22 +4,19 @@ using UnityEngine;
 
 public static class FishTargetSpawnerUtility
 {
-    static Dictionary<string, GameObject> _prefabs;
-    static Dictionary<string, GameObject> Prefabs
+    static GameObject _basePrefab;
+    static GameObject BasePrefab
     {
         get
         {
-            if (_prefabs == null)
+            if (_basePrefab == null)
             {
-                _prefabs = new Dictionary<string, GameObject>();
-                foreach (GameObject model in Resources.LoadAll<GameObject>("Prefabs/FishTargets"))
-                {
-                    _prefabs.Add(model.name, model);
-                }
+                _basePrefab = Resources.Load<GameObject>("StaticData/FishTargets/BaseFishTarget");
             }
-            return _prefabs;
+            return _basePrefab;
         }
     }
+
     static Dictionary<string, FishTargetStaticData> _staticData;
     static Dictionary<string, FishTargetStaticData> StaticData
     {
@@ -39,30 +36,22 @@ public static class FishTargetSpawnerUtility
 
     public static FishTarget CreateTarget(FishTargetType type)
     {
-        FishTarget target = Object.Instantiate(Prefabs["FishTarget"]).GetComponent<FishTarget>();
+        FishTarget target = Object.Instantiate(BasePrefab).GetComponent<FishTarget>();
         target.type = type;
         GameObject prefab;
-        if (Prefabs.ContainsKey(target.type.ToString()) && target.type.ToString() != "FishTarget")
-        {
-            prefab = Prefabs[target.type.ToString()];
-        }
-        else
-        {
-            Debug.LogWarning($"Target name invalid: {target.type}. Renaming to Larry...");
-            prefab = Prefabs["Larry"];
-        }
-        GameObject model = Object.Instantiate(prefab);
-        model.transform.parent = target.transform;
-
         if (StaticData.ContainsKey(target.type.ToString()))
         {
             target.staticData = StaticData[target.type.ToString()];
+            prefab = StaticData[target.type.ToString()].modelPrefab;
         }
         else
         {
             Debug.LogWarning($"Static data not found: {target.type}. Defaulting to Larry...");
             target.staticData = StaticData["Larry"];
+            prefab = StaticData["Larry"].modelPrefab;
         }
+        GameObject model = Object.Instantiate(prefab);
+        model.transform.parent = target.transform;
 
         return target;
     }

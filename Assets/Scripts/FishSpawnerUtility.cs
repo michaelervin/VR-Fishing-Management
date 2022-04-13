@@ -4,20 +4,16 @@ using UnityEngine;
 
 public static class FishSpawnerUtility
 {
-    static Dictionary<string, GameObject> _prefabs;
-    static Dictionary<string, GameObject> Prefabs
+    static GameObject _basePrefab;
+    static GameObject BasePrefab
     {
         get
         {
-            if (_prefabs == null)
+            if (_basePrefab == null)
             {
-                _prefabs = new Dictionary<string, GameObject>();
-                foreach (GameObject model in Resources.LoadAll<GameObject>("Prefabs/Fish"))
-                {
-                    _prefabs.Add(model.name, model);
-                }
+                _basePrefab = Resources.Load<GameObject>("StaticData/Fish/BaseFish");
             }
-            return _prefabs;
+            return _basePrefab;
         }
     }
 
@@ -40,31 +36,23 @@ public static class FishSpawnerUtility
 
     public static Fish CreateFish(FishData data)
     {
-        Fish fish = Object.Instantiate(Prefabs["Fish"]).GetComponent<Fish>();
+        Fish fish = Object.Instantiate(BasePrefab).GetComponent<Fish>();
         fish.data = data;
         GameObject prefab;
-        if (Prefabs.ContainsKey(fish.data.name) && fish.data.name != "Fish")
-        {
-            prefab = Prefabs[fish.data.name];
-        }
-        else
-        {
-            Debug.LogWarning($"Fish name invalid: {fish.data.name}. Renaming to Jerry...");
-            prefab = Prefabs["Jerry"];
-            fish.data.name = "Jerry";
-        }
-        GameObject model = Object.Instantiate(prefab);
-        model.transform.parent = fish.transform;
-
         if (StaticData.ContainsKey(fish.data.name))
         {
             fish.staticData = StaticData[fish.data.name];
+            prefab = StaticData[fish.data.name].modelPrefab;
         }
         else
         {
             Debug.LogWarning($"Static data not found: {fish.data.name}. Defaulting to Jerry...");
             fish.staticData = StaticData["Jerry"];
+            prefab = StaticData["Jerry"].modelPrefab;
+            fish.data.name = "Jerry";
         }
+        GameObject model = Object.Instantiate(prefab);
+        model.transform.parent = fish.transform;
 
         return fish;
     }

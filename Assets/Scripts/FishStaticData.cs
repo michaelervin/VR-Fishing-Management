@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class FishStaticData : ScriptableObject
 {
+    public GameObject modelPrefab;
     public List<FishTargetType> targetTypes;
 }
