@@ -61,7 +61,7 @@ public static class FishTargetSpawnerUtility
         else
         {
             Debug.LogWarning($"Static data not found: {target.type}. Defaulting to Larry...");
-            target.staticData = StaticData["Jerry"];
+            target.staticData = StaticData["Larry"];
         }
 
         return target;

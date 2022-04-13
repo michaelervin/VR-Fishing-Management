@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Fish : MonoBehaviour, IContainable, IDisplayable
+public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable
 {
     public FishData data;
     public FishStaticData staticData;
@@ -16,8 +16,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     /// </summary>
     Boid boid;
     Rigidbody rb;
-    Hook attatchedHook;
-    bool hookInvulnerability;
+    Hook attachedHook;
 
     float IContainable.RequiredSpace => data.size;
 
@@ -37,9 +36,9 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
 
     private void FixedUpdate()
     {
-        if (attatchedHook != null)
+        if (attachedHook != null)
         {
-            rb.MovePosition(attatchedHook.transform.position);
+            rb.MovePosition(attachedHook.transform.position);
         }
     }
 
@@ -52,8 +51,10 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
         }
     }
 
-    public IEnumerator TugBobber(Rigidbody bobber)
+    public IEnumerator TugHook(Hook hook)
     {
+        Rigidbody bobber = hook.bobber;
+        AudioSource.PlayClipAtPoint(hook.fishingBellSound, bobber.transform.position);
         for (int i = 0; i < 3; i++)
         {
             bobber.AddForce(Vector3.down * 300);
@@ -63,35 +64,29 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
                 yield break;
             }
         }
-        DetachHook();
+        hook.Detach(this);
     }
 
-    public bool AttachHook(Hook hook)
+    void IAttachable.Attach(Hook hook)
     {
-        if (hookInvulnerability)
-        {
-            Debug.LogWarning("Failed to attach hook: the fish is invulnerable");
-            return false;
-        }
-        attatchedHook = hook;
+        attachedHook = hook;
         if (boid != null)
         {
             boid.enabled = false;
         }
         rb.isKinematic = true;
-        return true;
+
+        StartCoroutine(TugHook(hook));
     }
 
-    public void DetachHook()
+    void IAttachable.Detach()
     {
-        attatchedHook.attachedFish = null;
-        attatchedHook = null;
-        transform.position += Vector3.right;
+        attachedHook = null;
         if (boid != null)
         {
             boid.enabled = true;
         }
-        if(container == null)
+        if (container == null)
         {
             rb.isKinematic = false;
         }
@@ -107,19 +102,11 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
         Debug.Log("Nom");
     }
 
-    private IEnumerator HookInvulnerability(float seconds)
-    {
-        hookInvulnerability = true;
-        yield return new WaitForSeconds(seconds);
-        hookInvulnerability = false;
-    }
-
     private void OnAttachedToHand(Hand hand)
     {
-        if (attatchedHook != null)
+        if (attachedHook != null)
         {
-            DetachHook();
-            StartCoroutine(HookInvulnerability(3));
+            attachedHook.Detach(this);
         }
         rb.isKinematic = true;
     }
@@ -133,7 +120,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable
     {
         Debug.Assert(container is FishContainer);
         this.container = container as FishContainer;
-        if (boid != null && attatchedHook != null)
+        if (boid != null && attachedHook != null)
         {
             boid.enabled = false;
         }

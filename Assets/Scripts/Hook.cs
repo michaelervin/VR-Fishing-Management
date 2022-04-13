@@ -5,81 +5,45 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Hook : MonoBehaviour
 {
-    [Range(0,1)]
-    [SerializeField] float hookChance = 1;
-    [SerializeField] GameObject baitPrefab;
-    [SerializeField] Rigidbody bobber;
+    public Rigidbody bobber;
 
     public AudioClip fishingBellSound;
 
-    /// <summary>
-    /// The bait attatched to the hook. If there's no bait, this value will be null.
-    /// </summary>
-    [SerializeField] GameObject attachedBait;
-    /// <summary>
-    /// the Fish Attatched to the hook. If there's no fish, this value will be null.
-    /// </summary>
-    public Fish attachedFish;
+    List<IAttachable> attachedObjects = new List<IAttachable>();
+    IAttachable unattachableTemp;
 
-    public bool AddBait()
+    public void Attach(IAttachable attachable)
     {
-        if(attachedBait == null)
-        {
-            attachedBait = Instantiate(baitPrefab);
-            attachedBait.AddComponent<Follow>().followTransform = transform;
-            return true;
-        }
-        else
-        {
-            Debug.LogWarning("Tried to add bait when there's already bait");
-            return false;
-        }
+        attachedObjects.Add(attachable);
+        attachable.Attach(this);
     }
 
-    public bool AddBait(FishTarget bait)
+    public void Detach(IAttachable attachable)
     {
-        if (attachedBait == null)
-        {
-            attachedBait = bait.gameObject;
-            bait.gameObject.AddComponent<Follow>().followTransform = transform;
-            return true;
-        }
-        else
-        {
-            Debug.LogWarning("Tried to add bait when there's already bait");
-            return false;
-        }
+        attachable.Detach();
+        attachedObjects.Remove(attachable);
+        unattachableTemp = attachable;
+        StartCoroutine(CooldownUnattachableTemp());
     }
 
-    public void DetachFish()
+    private IEnumerator CooldownUnattachableTemp()
     {
-        attachedFish.DetachHook();
-        attachedFish = null;
+        yield return new WaitForSeconds(3);
+        unattachableTemp = null;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == attachedFish?.gameObject) return;
-        if (other.gameObject == attachedBait?.gameObject) return;
-
-        Fish fish = other.GetComponent<Fish>();
-        if (fish != null)
+        IAttachable attachable = other.GetComponent<IAttachable>();
+        if (attachable != null && attachable != unattachableTemp && !attachedObjects.Contains(attachable))
         {
-            if (Random.Range(0f, 1f) < hookChance)
-            {
-                if (fish.AttachHook(this))
-                {
-                    attachedFish = fish;
-                    StartCoroutine(fish.TugBobber(bobber));
-                    AudioSource.PlayClipAtPoint(fishingBellSound, transform.position);
-                }
-            }
-        }
-
-        FishTarget bait = other.GetComponent<FishTarget>();
-        if (bait != null)
-        {
-            AddBait(bait);
+            Attach(attachable);
         }
     }
+}
+
+public interface IAttachable
+{
+    public void Attach(Hook hook);
+    public void Detach();
 }

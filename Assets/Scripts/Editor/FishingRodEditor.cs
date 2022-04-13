@@ -21,13 +21,5 @@ public class FishingRodEditor : Editor
         {
             fishingRod.ReelBobber();
         }
-        if (GUILayout.Button("Set Bait"))
-        {
-            fishingRod.SetBait();
-        }
-        if (GUILayout.Button("Remove Fish"))
-        {
-            fishingRod.RemoveFish();
-        }
     }
 }

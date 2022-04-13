@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class FishTarget : MonoBehaviour, IContainable, IDisplayable
+public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
 {
     public FishTargetType type;
     public FishTargetStaticData staticData;
@@ -15,6 +15,9 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
 
     BoidFishContainer container;
 
+    private Follow follow;
+    private Hook attachedHook;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +26,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
     private void OnDestroy()
     {
         container?.Remove(this);
+        attachedHook?.Detach(this);
     }
 
     void IContainable.Contain<T>(ObjectContainer<T> container)
@@ -52,6 +56,15 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
         }
     }
 
+    private void OnAttachedToHand(Hand hand)
+    {
+        if (attachedHook != null)
+        {
+            attachedHook.Detach(this);
+        }
+        rb.isKinematic = true;
+    }
+
     void IContainable.Release()
     {
         rb.useGravity = true;
@@ -63,6 +76,20 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable
         info.image = null;
         info.text = type.ToString();
         return info;
+    }
+
+    void IAttachable.Attach(Hook hook)
+    {
+        follow = gameObject.AddComponent<Follow>();
+        follow.followTransform = hook.transform;
+        attachedHook = hook;
+    }
+
+    void IAttachable.Detach()
+    {
+        Destroy(follow);
+        follow = null;
+        attachedHook = null;
     }
 }
 

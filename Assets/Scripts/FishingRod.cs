@@ -27,30 +27,6 @@ public class FishingRod : MonoBehaviour
         }
     }
 
-    public void SetBait()
-    {
-        if (isReeled)
-        {
-            hook.AddBait();
-        }
-        else
-        {
-            Debug.LogWarning("Tried to set bait while not reeled");
-        }
-    }
-
-    public void RemoveFish()
-    {
-        if (isReeled)
-        {
-            hook.DetachFish();
-        }
-        else
-        {
-            Debug.LogWarning("Tried to remove fish while not reeled");
-        }
-    }
-
     public void LaunchBobber()
     {
         if (!isReeling)
