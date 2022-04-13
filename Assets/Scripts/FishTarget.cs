@@ -7,6 +7,7 @@ using Valve.VR.InteractionSystem;
 public class FishTarget : MonoBehaviour, IContainable, IDisplayable
 {
     public FishTargetType type;
+    public FishTargetStaticData staticData;
 
     float IContainable.RequiredSpace => 0;
 

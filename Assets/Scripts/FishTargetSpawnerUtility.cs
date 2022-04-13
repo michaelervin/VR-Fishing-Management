@@ -20,6 +20,22 @@ public static class FishTargetSpawnerUtility
             return _prefabs;
         }
     }
+    static Dictionary<string, FishTargetStaticData> _staticData;
+    static Dictionary<string, FishTargetStaticData> StaticData
+    {
+        get
+        {
+            if (_staticData == null)
+            {
+                _staticData = new Dictionary<string, FishTargetStaticData>();
+                foreach (FishTargetStaticData data in Resources.LoadAll<FishTargetStaticData>("StaticData/FishTargets"))
+                {
+                    _staticData.Add(data.name, data);
+                }
+            }
+            return _staticData;
+        }
+    }
 
     public static FishTarget CreateTarget(FishTargetType type)
     {
@@ -37,6 +53,17 @@ public static class FishTargetSpawnerUtility
         }
         GameObject model = Object.Instantiate(prefab);
         model.transform.parent = target.transform;
+
+        if (StaticData.ContainsKey(target.type.ToString()))
+        {
+            target.staticData = StaticData[target.type.ToString()];
+        }
+        else
+        {
+            Debug.LogWarning($"Static data not found: {target.type}. Defaulting to Larry...");
+            target.staticData = StaticData["Jerry"];
+        }
+
         return target;
     }
 }

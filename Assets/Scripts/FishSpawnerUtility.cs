@@ -20,6 +20,7 @@ public static class FishSpawnerUtility
             return _prefabs;
         }
     }
+
     static Dictionary<string, FishStaticData> _staticData;
     static Dictionary<string, FishStaticData> StaticData
     {
@@ -28,7 +29,7 @@ public static class FishSpawnerUtility
             if (_staticData == null)
             {
                 _staticData = new Dictionary<string, FishStaticData>();
-                foreach (FishStaticData data in Resources.LoadAll<FishStaticData>("FishStaticData"))
+                foreach (FishStaticData data in Resources.LoadAll<FishStaticData>("StaticData/Fish"))
                 {
                     _staticData.Add(data.name, data);
                 }
