@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79517fe496597884298b628b4c9daaa6, type: 3}
   m_Name: CrankBait
   m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 8823384539401255080, guid: cf77670d2ab87384bb56767a3acaccaa, type: 3}
   hideHook: 1
   consumable: 0

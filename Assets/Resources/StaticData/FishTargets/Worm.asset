@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79517fe496597884298b628b4c9daaa6, type: 3}
   m_Name: Worm
   m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 3344591980247955264, guid: 053b91261bf89ab439f5e9102a8075c1, type: 3}
   hideHook: 0
   consumable: 1
