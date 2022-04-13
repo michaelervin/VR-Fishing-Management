@@ -71,4 +71,6 @@ public enum FishTargetType
     Insect,
     SmallFish,
     Worms,
+    CrankBait,
+    MinnowBait,
 }

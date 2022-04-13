@@ -21,23 +21,23 @@ public static class FishTargetSpawnerUtility
         }
     }
 
-    public static FishTarget CreateTarget(FishTargetType data)
+    public static FishTarget CreateTarget(FishTargetType type)
     {
-        FishTarget fish = Object.Instantiate(Prefabs["FishTarget"]).GetComponent<FishTarget>();
-        fish.type = data;
+        FishTarget target = Object.Instantiate(Prefabs["FishTarget"]).GetComponent<FishTarget>();
+        target.type = type;
         GameObject prefab;
-        if (Prefabs.ContainsKey(fish.type.ToString()) && fish.type.ToString() != "FishTarget")
+        if (Prefabs.ContainsKey(target.type.ToString()) && target.type.ToString() != "FishTarget")
         {
-            prefab = Prefabs[fish.type.ToString()];
+            prefab = Prefabs[target.type.ToString()];
         }
         else
         {
-            Debug.LogWarning($"Target name invalid: {fish.type}. Renaming to Larry...");
+            Debug.LogWarning($"Target name invalid: {target.type}. Renaming to Larry...");
             prefab = Prefabs["Larry"];
         }
         GameObject model = Object.Instantiate(prefab);
-        model.transform.parent = fish.transform;
-        return fish;
+        model.transform.parent = target.transform;
+        return target;
     }
 }
 
