@@ -45,7 +45,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable
     private void OnTriggerEnter(Collider other)
     {
         FishTarget fishFood = other.GetComponent<FishTarget>();
-        if(fishFood != null && staticData.targetTypes.Contains(fishFood.type))
+        if(fishFood != null && fishFood.staticData.consumable && staticData.targetTypes.Contains(fishFood.type))
         {
             Eat(fishFood);
         }

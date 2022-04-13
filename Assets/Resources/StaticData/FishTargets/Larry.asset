@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Larry
   m_EditorClassIdentifier: 
   hideHook: 0
-  consumable: 0
+  consumable: 1

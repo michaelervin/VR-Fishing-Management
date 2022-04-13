@@ -12,6 +12,17 @@ public class Hook : MonoBehaviour
     List<IAttachable> attachedObjects = new List<IAttachable>();
     IAttachable unattachableTemp;
 
+    GameObject _visualObject;
+    public bool Visable
+    {
+        set => _visualObject.SetActive(value);
+    }
+
+    private void Awake()
+    {
+        _visualObject = transform.GetChild(0).gameObject;
+    }
+
     public void Attach(IAttachable attachable)
     {
         attachedObjects.Add(attachable);

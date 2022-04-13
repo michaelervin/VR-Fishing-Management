@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79517fe496597884298b628b4c9daaa6, type: 3}
   m_Name: Worm
   m_EditorClassIdentifier: 
+  hideHook: 0
+  consumable: 1

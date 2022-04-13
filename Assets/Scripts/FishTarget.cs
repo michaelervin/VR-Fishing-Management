@@ -83,12 +83,23 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
         follow = gameObject.AddComponent<Follow>();
         follow.followTransform = hook.transform;
         attachedHook = hook;
+        if (staticData.hideHook)
+        {
+            hook.Visable = false;
+        }
     }
 
     void IAttachable.Detach()
     {
         Destroy(follow);
         follow = null;
+
+        if (staticData.hideHook)
+        {
+            // TODO: This doesn't account for other attached objects making it invisible
+            attachedHook.Visable = true;
+        }
+
         attachedHook = null;
     }
 }
