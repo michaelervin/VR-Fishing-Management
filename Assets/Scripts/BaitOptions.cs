@@ -62,35 +62,35 @@ public class BaitOptions : MonoBehaviour, ISavable
                 
                 if(jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
                 {
-                    EnableBuyButton();
+                    buyButton.SetActive(true);
                 }
                 if(jerryBucksAmount.jerryBucks < baitValues[luresListIndex].value)
                 {
-                    DisableBuyButton();
+                    buyButton.SetActive(false);
                 }
                 if (baitAmounts[luresListIndex].value > 0)
                 {
-                    EnableSellButton();
+                    sellButton.SetActive(true);
                 }
                 if (baitAmounts[luresListIndex].value == 0)
                 {
-                    DisableSellButton();
+                    sellButton.SetActive(false);
                 }
                 if (luresListIndex > 0)
                 {
-                    EnableLeftButton();
+                    leftButton.SetActive(true);
                 }
                 if (luresListIndex == 0)
                 {
-                    DisableLeftButton();
+                    leftButton.SetActive(false);
                 }
                 if (luresListIndex < luresList.Count)
                 {
-                    EnableRightButton();
+                    rightButton.SetActive(true);
                 }
                 if (luresListIndex == 2)
                 {
-                    DisableRightButton();
+                    rightButton.SetActive(false);
                 }
             }
             else
@@ -98,47 +98,6 @@ public class BaitOptions : MonoBehaviour, ISavable
                 luresList[i].SetActive(false);
             }
         }
-    }
-
-    // These methods manage the buttons
-    private void EnableBuyButton()
-    {
-        buyButton.SetActive(true);
-    }
-
-    private void DisableBuyButton()
-    {
-        buyButton.SetActive(false);
-    }
-
-    private void EnableSellButton()
-    {
-        sellButton.SetActive(true);
-    }
-
-    private void DisableSellButton()
-    {
-        sellButton.SetActive(false);
-    }
-
-    private void EnableLeftButton()
-    {
-        leftButton.SetActive(true);
-    }
-
-    private void DisableLeftButton()
-    {
-        leftButton.SetActive(false);
-    }
-
-    private void EnableRightButton()
-    {
-        rightButton.SetActive(true);
-    }
-
-    private void DisableRightButton()
-    {
-        rightButton.SetActive(false);
     }
 
     public void Purchasing()
