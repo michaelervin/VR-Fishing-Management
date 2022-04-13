@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Sunfish
   m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 5112950483934258971, guid: 676b89c575ef1af43a3d693cb355ab7f, type: 3}
   targetTypes: 01000000

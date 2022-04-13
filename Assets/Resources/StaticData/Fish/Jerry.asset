@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Jerry
   m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 1423194686534320620, guid: ea0e9ab8c24d141479efa5723f62121e, type: 3}
   targetTypes: 00000000

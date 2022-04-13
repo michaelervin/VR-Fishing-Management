@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Bluegill
   m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 6053705338631005978, guid: eea932fb79f19b44f8b7de52622ce171, type: 3}
   targetTypes: 03000000
