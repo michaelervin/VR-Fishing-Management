@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Worm
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 3344591980247955264, guid: 053b91261bf89ab439f5e9102a8075c1, type: 3}
-  sprite: {fileID: 21300000, guid: d7417acea4a30704198332987841b291, type: 3}
+  sprite: {fileID: 21300000, guid: 34532f224c4b06043a6452107ef0a4a0, type: 3}
+  cost: 0
   hideHook: 0
   consumable: 1
