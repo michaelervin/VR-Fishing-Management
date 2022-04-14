@@ -55,7 +55,9 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
             container.Remove(this);
         }
     }
-
+    
+    // TODO: this _hand thing sucks
+    public Hand _hand;
     private void OnAttachedToHand(Hand hand)
     {
         if (attachedHook != null)
@@ -63,6 +65,12 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
             attachedHook.Detach(this);
         }
         rb.isKinematic = true;
+        _hand = hand;
+    }
+
+    private void OnDetachedToHand(Hand hand)
+    {
+        hand = null;
     }
 
     void IContainable.Release()
