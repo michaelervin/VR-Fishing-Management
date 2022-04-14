@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
-public class SellBox : MonoBehaviour
+public class SellBaitBox : MonoBehaviour
 {
     public UnityEvent<FishTarget> OnCollide;
 

@@ -87,8 +87,12 @@ public class FishMarketManager : MonoBehaviour
         if (jerryBucksAmount.jerryBucks >= fishList[fishListIndex].cost)
         {
             jerryBucksAmount.jerryBucks -= fishList[fishListIndex].cost;
-            FishTarget target = FishTargetSpawnerUtility.CreateTarget(fishList[fishListIndex].name);
-            target.transform.position = spawnPoint.position;
+            FishData fishData = new FishData();
+            fishData.name = fishList[fishListIndex].name;
+            fishData.nickName = "Bubbles";
+            fishData.size = 1;
+            Fish fish = FishSpawnerUtility.CreateFish(fishData);
+            fish.transform.position = spawnPoint.position;
         }
     }
 
