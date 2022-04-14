@@ -17,6 +17,7 @@ public class FishMarketManager : MonoBehaviour
     [SerializeField] GameObject buyButton;
     [SerializeField] GameObject leftButton;
     [SerializeField] GameObject rightButton;
+    [SerializeField] GameObject bankEmptyText;
 
 
     public int fishListIndex = 0;
@@ -71,6 +72,7 @@ public class FishMarketManager : MonoBehaviour
             {
                 imageObjects[i].SetActive(true);
 
+                bankEmptyText.SetActive(jerryBucksAmount.jerryBucks < fishList[fishListIndex].cost);
                 buyButton.SetActive(jerryBucksAmount.jerryBucks >= fishList[fishListIndex].cost);
                 leftButton.SetActive(fishListIndex > 0);
                 rightButton.SetActive(fishListIndex < fishList.Count - 1);
