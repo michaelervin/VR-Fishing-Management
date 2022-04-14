@@ -6,5 +6,7 @@ using UnityEngine;
 public class FishStaticData : ScriptableObject
 {
     public GameObject modelPrefab;
+    public Sprite sprite;
+    public double cost;
     public List<FishTargetType> targetTypes;
 }

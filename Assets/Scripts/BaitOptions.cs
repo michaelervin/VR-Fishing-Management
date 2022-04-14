@@ -100,7 +100,7 @@ public class BaitOptions : MonoBehaviour
     public void Selling(FishTarget target)
     {
         jerryBucksAmount.jerryBucks += target.staticData.cost;
-        target._hand.DetachObject(target.gameObject);
+        target._hand?.DetachObject(target.gameObject);
         Destroy(target.gameObject);
     }
 }
