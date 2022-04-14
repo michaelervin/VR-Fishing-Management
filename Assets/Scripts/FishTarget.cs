@@ -64,13 +64,13 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
         {
             attachedHook.Detach(this);
         }
-        rb.isKinematic = true;
         _hand = hand;
     }
 
     private void OnDetachedToHand(Hand hand)
     {
         hand = null;
+        rb.isKinematic = false;
     }
 
     void IContainable.Release()

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 95547073240177241}
   - component: {fileID: -101799096774453376}
   - component: {fileID: -5755230865065186208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BaseFishTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  staticData: {fileID: 0}
   rb: {fileID: 0}
+  _hand: {fileID: 0}
 --- !u!114 &95547073240177241
 MonoBehaviour:
   m_ObjectHideFlags: 0
