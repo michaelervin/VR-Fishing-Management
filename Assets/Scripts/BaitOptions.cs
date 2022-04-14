@@ -1,31 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-//These classes are used to store the values for each item in the market
-[Serializable]
-public class BaitValue
+public class BaitOptions : MonoBehaviour
 {
-    public string name = "Jerry";
-    public double value = 0;
-}
-
-[Serializable]
-public class BaitAmount
-{
-    public string name = "Jerry";
-    public double value = 0;
-}
-public class BaitOptions : MonoBehaviour, ISavable
-{
-    [SerializeField] BaitValue[] baitValues;
-
-    public BaitAmount[] baitAmounts;
-
     public JerryBank jerryBucksAmount;
 
-    [SerializeField] List<GameObject> luresList;
+    List<FishTargetStaticData> luresList = new List<FishTargetStaticData>();
+
+    [SerializeField] Transform screenTransform;
+    [SerializeField] Transform spawnPoint;
+    List<GameObject> imageObjects = new List<GameObject>();
 
     [SerializeField] GameObject sellButton;
     [SerializeField] GameObject buyButton;
@@ -35,10 +23,39 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     public int luresListIndex = 0;
 
+    private void Start()
+    {
+        foreach (FishTargetType type in Enum.GetValues(typeof(FishTargetType)))
+        {
+            if (type == FishTargetType.Unknown) continue;
+            luresList.Add(FishTargetSpawnerUtility.GetStaticData(type));
+        }
+
+        CreateImages();
+    }
+
+    private void CreateImages()
+    {
+        foreach (FishTargetStaticData bait in luresList)
+        {
+            SpriteRenderer sprite = new GameObject(bait.name).AddComponent<SpriteRenderer>();
+            sprite.sprite = bait.sprite;
+            sprite.transform.SetParent(screenTransform, false);
+
+            TextMeshPro text = new GameObject("Text").AddComponent<TextMeshPro>();
+            text.text = $"Name: {bait.name}\nCost: {bait.cost}";
+            text.rectTransform.sizeDelta = new Vector2(1, 1);
+            text.fontSize = 1;
+            text.transform.SetParent(sprite.transform, false);
+
+            imageObjects.Add(sprite.gameObject);
+        }
+    }
+
     // Changes Lure displaye on screen based on luresListIndex
     public void IncreaseIndex()
     {
-        if (luresListIndex < 2)
+        if (luresListIndex < luresList.Count - 1)
         {
             luresListIndex++;
         }
@@ -58,76 +75,32 @@ public class BaitOptions : MonoBehaviour, ISavable
         {
             if (i == luresListIndex)
             {
-                luresList[i].SetActive(true);
-                
-                if(jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
-                {
-                    buyButton.SetActive(true);
-                }
-                if(jerryBucksAmount.jerryBucks < baitValues[luresListIndex].value)
-                {
-                    buyButton.SetActive(false);
-                }
-                if (baitAmounts[luresListIndex].value > 0)
-                {
-                    sellButton.SetActive(true);
-                }
-                if (baitAmounts[luresListIndex].value == 0)
-                {
-                    sellButton.SetActive(false);
-                }
-                if (luresListIndex > 0)
-                {
-                    leftButton.SetActive(true);
-                }
-                if (luresListIndex == 0)
-                {
-                    leftButton.SetActive(false);
-                }
-                if (luresListIndex < luresList.Count)
-                {
-                    rightButton.SetActive(true);
-                }
-                if (luresListIndex == 2)
-                {
-                    rightButton.SetActive(false);
-                }
+                imageObjects[i].SetActive(true);
+
+                buyButton.SetActive(jerryBucksAmount.jerryBucks >= luresList[luresListIndex].cost);
+                sellButton.SetActive(luresList[luresListIndex].cost > 0);
+                leftButton.SetActive(luresListIndex > 0);
+                rightButton.SetActive(luresListIndex < luresList.Count - 1);
             }
             else
             {
-                luresList[i].SetActive(false);
+                imageObjects[i].SetActive(false);
             }
         }
     }
 
     public void Purchasing()
     {
-        if (jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
+        if (jerryBucksAmount.jerryBucks >= luresList[luresListIndex].cost)
         {
-            jerryBucksAmount.jerryBucks -= baitValues[luresListIndex].value;
+            jerryBucksAmount.jerryBucks -= luresList[luresListIndex].cost;
+            FishTarget target = FishTargetSpawnerUtility.CreateTarget(luresList[luresListIndex].name);
+            target.transform.position = spawnPoint.position;
         }
-
-        baitAmounts[luresListIndex].value++;
     }
 
     public void Selling()
     {
-        jerryBucksAmount.jerryBucks += baitValues[luresListIndex].value;
-        baitAmounts[luresListIndex].value--;
-    }
-
-    Type ISavable.GetSaveDataType()
-    {
-        return typeof(BaitOptionsSaveData);
-    }
-
-    void ISavable.OnFinishLoad()
-    {
-
-    }
-
-    class BaitOptionsSaveData: SaveData
-    {
-        public BaitAmount[] baitAmounts;
+        jerryBucksAmount.jerryBucks += luresList[luresListIndex].cost;
     }
 }

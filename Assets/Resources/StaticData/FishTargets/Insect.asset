@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79517fe496597884298b628b4c9daaa6, type: 3}
-  m_Name: CrankBait
+  m_Name: Insect
   m_EditorClassIdentifier: 
-  modelPrefab: {fileID: 8823384539401255080, guid: cf77670d2ab87384bb56767a3acaccaa, type: 3}
-  sprite: {fileID: 21300000, guid: d7417acea4a30704198332987841b291, type: 3}
+  modelPrefab: {fileID: 3344591980247955264, guid: 053b91261bf89ab439f5e9102a8075c1, type: 3}
+  sprite: {fileID: 0}
   cost: 0
-  hideHook: 1
+  hideHook: 0
   consumable: 0

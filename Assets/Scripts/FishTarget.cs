@@ -109,7 +109,7 @@ public enum FishTargetType
     Unknown,
     Insect,
     SmallFish,
-    Worms,
+    Worm,
     CrankBait,
     MinnowBait,
 }
