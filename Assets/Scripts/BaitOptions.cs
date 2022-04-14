@@ -15,7 +15,6 @@ public class BaitOptions : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     List<GameObject> imageObjects = new List<GameObject>();
 
-    [SerializeField] GameObject sellButton;
     [SerializeField] GameObject buyButton;
     [SerializeField] GameObject leftButton;
     [SerializeField] GameObject rightButton;
@@ -78,7 +77,6 @@ public class BaitOptions : MonoBehaviour
                 imageObjects[i].SetActive(true);
 
                 buyButton.SetActive(jerryBucksAmount.jerryBucks >= luresList[luresListIndex].cost);
-                sellButton.SetActive(luresList[luresListIndex].cost > 0);
                 leftButton.SetActive(luresListIndex > 0);
                 rightButton.SetActive(luresListIndex < luresList.Count - 1);
             }
@@ -99,8 +97,9 @@ public class BaitOptions : MonoBehaviour
         }
     }
 
-    public void Selling()
+    public void Selling(FishTarget target)
     {
-        jerryBucksAmount.jerryBucks += luresList[luresListIndex].cost;
+        jerryBucksAmount.jerryBucks += target.staticData.cost;
+        Destroy(target.gameObject);
     }
 }
