@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Yellow Perch
   m_EditorClassIdentifier: 
-  targetTypes: 0200000005000000
+  modelPrefab: {fileID: 410880647927330246, guid: c5607e0e083a2d1459c201c8a59c06b8, type: 3}
+  sprite: {fileID: 21300000, guid: 40388c59a06390449a844295a6ca8330, type: 3}
+  cost: 30
+  targetTypes: 020000000500000004000000

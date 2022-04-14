@@ -1,33 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-//These classes are used to store the values for each item in the market
-[Serializable]
-public class BaitValue
+public class BaitOptions : MonoBehaviour
 {
-    public string name = "Jerry";
-    public double value = 0;
-}
-
-[Serializable]
-public class BaitAmount
-{
-    public string name = "Jerry";
-    public double value = 0;
-}
-public class BaitOptions : MonoBehaviour, ISavable
-{
-    [SerializeField] BaitValue[] baitValues;
-
-    public BaitAmount[] baitAmounts;
-
     public JerryBank jerryBucksAmount;
 
-    [SerializeField] List<GameObject> luresList;
+    List<FishTargetStaticData> luresList = new List<FishTargetStaticData>();
 
-    [SerializeField] GameObject sellButton;
+    [SerializeField] Transform screenTransform;
+    [SerializeField] Transform spawnPoint;
+    List<GameObject> imageObjects = new List<GameObject>();
+
+    [SerializeField] GameObject emptyBankText;
     [SerializeField] GameObject buyButton;
     [SerializeField] GameObject leftButton;
     [SerializeField] GameObject rightButton;
@@ -35,10 +23,39 @@ public class BaitOptions : MonoBehaviour, ISavable
 
     public int luresListIndex = 0;
 
+    private void Start()
+    {
+        foreach (FishTargetType type in Enum.GetValues(typeof(FishTargetType)))
+        {
+            if (type == FishTargetType.Unknown) continue;
+            luresList.Add(FishTargetSpawnerUtility.GetStaticData(type));
+        }
+
+        CreateImages();
+    }
+
+    private void CreateImages()
+    {
+        foreach (FishTargetStaticData bait in luresList)
+        {
+            SpriteRenderer sprite = new GameObject(bait.name).AddComponent<SpriteRenderer>();
+            sprite.sprite = bait.sprite;
+            sprite.transform.SetParent(screenTransform, false);
+
+            TextMeshPro text = new GameObject("Text").AddComponent<TextMeshPro>();
+            text.text = $"Name: {bait.name}\nCost: {bait.cost}";
+            text.rectTransform.sizeDelta = new Vector2(1, 1);
+            text.fontSize = 1;
+            text.transform.SetParent(sprite.transform, false);
+
+            imageObjects.Add(sprite.gameObject);
+        }
+    }
+
     // Changes Lure displaye on screen based on luresListIndex
     public void IncreaseIndex()
     {
-        if (luresListIndex < 2)
+        if (luresListIndex < luresList.Count - 1)
         {
             luresListIndex++;
         }
@@ -58,117 +75,34 @@ public class BaitOptions : MonoBehaviour, ISavable
         {
             if (i == luresListIndex)
             {
-                luresList[i].SetActive(true);
-                
-                if(jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
-                {
-                    EnableBuyButton();
-                }
-                if(jerryBucksAmount.jerryBucks < baitValues[luresListIndex].value)
-                {
-                    DisableBuyButton();
-                }
-                if (baitAmounts[luresListIndex].value > 0)
-                {
-                    EnableSellButton();
-                }
-                if (baitAmounts[luresListIndex].value == 0)
-                {
-                    DisableSellButton();
-                }
-                if (luresListIndex > 0)
-                {
-                    EnableLeftButton();
-                }
-                if (luresListIndex == 0)
-                {
-                    DisableLeftButton();
-                }
-                if (luresListIndex < luresList.Count)
-                {
-                    EnableRightButton();
-                }
-                if (luresListIndex == 2)
-                {
-                    DisableRightButton();
-                }
+                imageObjects[i].SetActive(true);
+
+                emptyBankText.SetActive(jerryBucksAmount.jerryBucks < luresList[luresListIndex].cost);
+                buyButton.SetActive(jerryBucksAmount.jerryBucks >= luresList[luresListIndex].cost);
+                leftButton.SetActive(luresListIndex > 0);
+                rightButton.SetActive(luresListIndex < luresList.Count - 1);
             }
             else
             {
-                luresList[i].SetActive(false);
+                imageObjects[i].SetActive(false);
             }
         }
-    }
-
-    // These methods manage the buttons
-    private void EnableBuyButton()
-    {
-        buyButton.SetActive(true);
-    }
-
-    private void DisableBuyButton()
-    {
-        buyButton.SetActive(false);
-    }
-
-    private void EnableSellButton()
-    {
-        sellButton.SetActive(true);
-    }
-
-    private void DisableSellButton()
-    {
-        sellButton.SetActive(false);
-    }
-
-    private void EnableLeftButton()
-    {
-        leftButton.SetActive(true);
-    }
-
-    private void DisableLeftButton()
-    {
-        leftButton.SetActive(false);
-    }
-
-    private void EnableRightButton()
-    {
-        rightButton.SetActive(true);
-    }
-
-    private void DisableRightButton()
-    {
-        rightButton.SetActive(false);
     }
 
     public void Purchasing()
     {
-        if (jerryBucksAmount.jerryBucks >= baitValues[luresListIndex].value)
+        if (jerryBucksAmount.jerryBucks >= luresList[luresListIndex].cost)
         {
-            jerryBucksAmount.jerryBucks -= baitValues[luresListIndex].value;
+            jerryBucksAmount.jerryBucks -= luresList[luresListIndex].cost;
+            FishTarget target = FishTargetSpawnerUtility.CreateTarget(luresList[luresListIndex].name);
+            target.transform.position = spawnPoint.position;
         }
-
-        baitAmounts[luresListIndex].value++;
     }
 
-    public void Selling()
+    public void Selling(FishTarget target)
     {
-        jerryBucksAmount.jerryBucks += baitValues[luresListIndex].value;
-        baitAmounts[luresListIndex].value--;
-    }
-
-    Type ISavable.GetSaveDataType()
-    {
-        return typeof(BaitOptionsSaveData);
-    }
-
-    void ISavable.OnFinishLoad()
-    {
-
-    }
-
-    class BaitOptionsSaveData: SaveData
-    {
-        public BaitAmount[] baitAmounts;
+        jerryBucksAmount.jerryBucks += target.staticData.cost;
+        target._hand?.DetachObject(target.gameObject);
+        Destroy(target.gameObject);
     }
 }

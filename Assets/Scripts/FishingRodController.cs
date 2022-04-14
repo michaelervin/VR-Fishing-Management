@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(FishingRod))]
@@ -9,6 +10,7 @@ public class FishingRodController : MonoBehaviour
     private Interactable interactable;
     private FishingRod fishingRod;
     private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & (~Hand.AttachmentFlags.SnapOnAttach) & (~Hand.AttachmentFlags.DetachOthers) & (~Hand.AttachmentFlags.VelocityMovement);
+    public SteamVR_Action_Boolean teleportAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Teleport");
 
     private bool prevGrabEndState;
     private bool firstGrabEnded;
@@ -40,24 +42,47 @@ public class FishingRodController : MonoBehaviour
             return;
         }
 
-        if (interactable.attachedToHand == hand)
+        if (WasTeleportButtonReleased(hand))
         {
-            if(startingGrabType != GrabTypes.None)
-            {
-                fishingRod.ReelBobber();
-            }
-            if (isGrabEnding && isGrabEnding != prevGrabEndState)
-            {
-                if (!firstGrabEnded)
-                {
-                    firstGrabEnded = true;
-                }
-                else
-                {
-                    fishingRod.LaunchBobber();
-                }
-            }
+            Debug.Log("Launch");
+            fishingRod.LaunchBobber();
+        }
+        else if(IsTeleportButtonDown(hand))
+        {
+            Debug.Log("reel");
+            fishingRod.ReelBobber();
         }
         prevGrabEndState = isGrabEnding;
+    }
+
+    private bool WasTeleportButtonReleased(Hand hand)
+    {
+        if (hand.noSteamVRFallbackCamera != null)
+        {
+            return Input.GetKeyUp(KeyCode.T);
+        }
+        else
+        {
+            return teleportAction.GetStateUp(hand.handType);
+
+            //return hand.controller.GetPressUp( SteamVR_Controller.ButtonMask.Touchpad );
+        }
+
+        return false;
+    }
+
+    //-------------------------------------------------
+    private bool IsTeleportButtonDown(Hand hand)
+    {
+        if (hand.noSteamVRFallbackCamera != null)
+        {
+            return Input.GetKey(KeyCode.T);
+        }
+        else
+        {
+            return teleportAction.GetState(hand.handType);
+        }
+
+        return false;
     }
 }

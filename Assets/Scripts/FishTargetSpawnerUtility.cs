@@ -34,6 +34,11 @@ public static class FishTargetSpawnerUtility
         }
     }
 
+    public static FishTarget CreateTarget(string type)
+    {
+        return CreateTarget((FishTargetType)System.Enum.Parse(typeof(FishTargetType), type));
+    }
+
     public static FishTarget CreateTarget(FishTargetType type)
     {
         FishTarget target = Object.Instantiate(BasePrefab).GetComponent<FishTarget>();
@@ -54,6 +59,19 @@ public static class FishTargetSpawnerUtility
         model.transform.parent = target.transform;
 
         return target;
+    }
+
+    public static FishTargetStaticData GetStaticData(FishTargetType type)
+    {
+        if (StaticData.ContainsKey(type.ToString()))
+        {
+            return StaticData[type.ToString()];
+        }
+        else
+        {
+            Debug.LogWarning($"Static data not found: {type}. Defaulting to Larry...");
+            return StaticData["Larry"];
+        }
     }
 }
 

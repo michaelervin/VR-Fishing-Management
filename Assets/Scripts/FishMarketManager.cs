@@ -1,47 +1,51 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-//These classes are used to store the values for each item in the market
-[Serializable]
-public class FishBuyValue
+public class FishMarketManager : MonoBehaviour
 {
-    public string name = "Jerry";
-    public double value = 0;
-}
-
-[Serializable]
-public class FishSellValue
-{
-    public string name = "Jerry";
-    public double value = 0;
-}
-
-[Serializable]
-public class FishAmount
-{
-    public string name = "Jerry";
-    public double value = 0;
-}
-public class FishMarketManager : MonoBehaviour, ISavable
-{
-    [SerializeField] FishBuyValue[] fishBuyValues;
-    [SerializeField] FishSellValue[] fishSellValues;
-
-    public FishAmount[] fishAmounts;
-
     public JerryBank jerryBucksAmount;
 
-    [SerializeField] List<GameObject> fishList;
+    List<FishStaticData> fishList = new List<FishStaticData>();
 
-    [SerializeField] GameObject sellButton;
+    [SerializeField] Transform screenTransform;
+    [SerializeField] Transform spawnPoint;
+    List<GameObject> imageObjects = new List<GameObject>();
+
     [SerializeField] GameObject buyButton;
     [SerializeField] GameObject leftButton;
     [SerializeField] GameObject rightButton;
+    [SerializeField] GameObject bankEmptyText;
 
 
     public int fishListIndex = 0;
+
+    private void Start()
+    {
+        fishList.AddRange(FishSpawnerUtility.GetAllStaticData());
+
+        CreateImages();
+    }
+
+    private void CreateImages()
+    {
+        foreach (FishStaticData fish in fishList)
+        {
+            SpriteRenderer sprite = new GameObject(fish.name).AddComponent<SpriteRenderer>();
+            sprite.sprite = fish.sprite;
+            sprite.transform.SetParent(screenTransform, false);
+
+            TextMeshPro text = new GameObject("Text").AddComponent<TextMeshPro>();
+            text.text = $"Name: {fish.name}\nCost: {fish.cost}";
+            text.rectTransform.sizeDelta = new Vector2(1, 1);
+            text.fontSize = 1;
+            text.transform.SetParent(sprite.transform, false);
+
+            imageObjects.Add(sprite.gameObject);
+        }
+    }
 
     // Changes Fish displayed on screen based on fishListIndex
     public void IncreaseIndex()
@@ -66,117 +70,38 @@ public class FishMarketManager : MonoBehaviour, ISavable
         {
             if (i == fishListIndex)
             {
-                fishList[i].SetActive(true);
+                imageObjects[i].SetActive(true);
 
-                if (jerryBucksAmount.jerryBucks >= fishBuyValues[fishListIndex].value)
-                {
-                    EnableBuyButton();
-                }
-                if (jerryBucksAmount.jerryBucks < fishBuyValues[fishListIndex].value)
-                {
-                    DisableBuyButton();
-                }
-                if (fishAmounts[fishListIndex].value > 0)
-                {
-                    EnableSellButton();
-                }
-                if (fishAmounts[fishListIndex].value == 0)
-                {
-                    DisableSellButton();
-                }
-                if (fishListIndex > 0)
-                {
-                    EnableLeftButton();
-                }
-                if (fishListIndex == 0)
-                {
-                    DisableLeftButton();
-                }
-                if (fishListIndex < fishList.Count)
-                {
-                    EnableRightButton();
-                }
-                if (fishListIndex == 3)
-                {
-                    DisableRightButton();
-                }
+                bankEmptyText.SetActive(jerryBucksAmount.jerryBucks < fishList[fishListIndex].cost);
+                buyButton.SetActive(jerryBucksAmount.jerryBucks >= fishList[fishListIndex].cost);
+                leftButton.SetActive(fishListIndex > 0);
+                rightButton.SetActive(fishListIndex < fishList.Count - 1);
             }
             else
             {
-                fishList[i].SetActive(false);
+                imageObjects[i].SetActive(false);
             }
         }
-    }
-
-    // These methods manage the buttons
-    private void EnableBuyButton()
-    {
-        buyButton.SetActive(true);
-    }
-
-    private void DisableBuyButton()
-    {
-        buyButton.SetActive(false);
-    }
-
-    private void EnableSellButton()
-    {
-        sellButton.SetActive(true);
-    }
-
-    private void DisableSellButton()
-    {
-        sellButton.SetActive(false);
-    }
-
-    private void EnableLeftButton()
-    {
-        leftButton.SetActive(true);
-    }
-
-    private void DisableLeftButton()
-    {
-        leftButton.SetActive(false);
-    }
-
-    private void EnableRightButton()
-    {
-        rightButton.SetActive(true);
-    }
-
-    private void DisableRightButton()
-    {
-        rightButton.SetActive(false);
     }
 
     public void Purchasing()
     {
-        if (jerryBucksAmount.jerryBucks >= fishBuyValues[fishListIndex].value)
+        if (jerryBucksAmount.jerryBucks >= fishList[fishListIndex].cost)
         {
-            jerryBucksAmount.jerryBucks -= fishBuyValues[fishListIndex].value;
+            jerryBucksAmount.jerryBucks -= fishList[fishListIndex].cost;
+            FishData fishData = new FishData();
+            fishData.name = fishList[fishListIndex].name;
+            fishData.nickName = "Bubbles";
+            fishData.size = 1;
+            Fish fish = FishSpawnerUtility.CreateFish(fishData);
+            fish.transform.position = spawnPoint.position;
         }
-
-        fishAmounts[fishListIndex].value++;
     }
 
-    public void Selling()
+    public void Selling(Fish fish)
     {
-        jerryBucksAmount.jerryBucks += fishSellValues[fishListIndex].value;
-        fishAmounts[fishListIndex].value--;
-    }
-
-    Type ISavable.GetSaveDataType()
-    {
-        return typeof(FishMarketSaveData);
-    }
-
-    void ISavable.OnFinishLoad()
-    {
-
-    }
-
-    class FishMarketSaveData : SaveData
-    {
-        public FishAmount[] fishAmounts;
+        jerryBucksAmount.jerryBucks += fish.staticData.cost;
+        fish._hand?.DetachObject(fish.gameObject);
+        Destroy(fish.gameObject);
     }
 }

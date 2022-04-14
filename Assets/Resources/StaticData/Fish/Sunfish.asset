@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Sunfish
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 5112950483934258971, guid: 676b89c575ef1af43a3d693cb355ab7f, type: 3}
-  targetTypes: 01000000
+  sprite: {fileID: 21300000, guid: c5d3ebb6d08c4354fb272868f7d74c40, type: 3}
+  cost: 20
+  targetTypes: 030000000100000002000000

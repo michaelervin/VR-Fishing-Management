@@ -55,14 +55,22 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
             container.Remove(this);
         }
     }
-
+    
+    // TODO: this _hand thing sucks
+    public Hand _hand;
     private void OnAttachedToHand(Hand hand)
     {
         if (attachedHook != null)
         {
             attachedHook.Detach(this);
         }
-        rb.isKinematic = true;
+        _hand = hand;
+    }
+
+    private void OnDetachedToHand(Hand hand)
+    {
+        hand = null;
+        rb.isKinematic = false;
     }
 
     void IContainable.Release()
@@ -109,7 +117,7 @@ public enum FishTargetType
     Unknown,
     Insect,
     SmallFish,
-    Worms,
+    Worm,
     CrankBait,
     MinnowBait,
 }

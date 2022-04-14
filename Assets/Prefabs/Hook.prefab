@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8688564319089273681}
   - component: {fileID: 8688564319089273677}
   - component: {fileID: 8688564319089273676}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,8 +187,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27661952e8d346d4c8f0d8d8f8562fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hookChance: 1
-  baitPrefab: {fileID: 3344591980247955264, guid: 053b91261bf89ab439f5e9102a8075c1, type: 3}
   bobber: {fileID: 0}
   fishingBellSound: {fileID: 0}
-  attachedFish: {fileID: 0}
