@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2935,6 +2935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 1373568592}
   rotationOffset: {x: 0, y: 180, z: 0}
+  lockX: 1
 --- !u!1 &1536556924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3971,6 +3972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ac557a10633cc4f8600b17ef8b7b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportAction:
+    actionPath: /actions/default/in/Teleport
+    needsReinit: 0
 --- !u!114 &1957025501
 MonoBehaviour:
   m_ObjectHideFlags: 0
