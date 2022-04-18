@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable
+public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMarketable
 {
     public FishData data;
     public FishStaticData staticData;
@@ -144,5 +144,10 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable
         info.text = data.nickName;
         info.image = FishDatabase.GetSprite(data.name);
         return info;
+    }
+
+    double IMarketable.BaseCost()
+    {
+        return staticData.cost;
     }
 }

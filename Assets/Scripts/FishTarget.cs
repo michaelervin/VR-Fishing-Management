@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
+public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMarketable
 {
     public FishTargetType type;
     public FishTargetStaticData staticData;
@@ -109,6 +109,11 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
         }
 
         attachedHook = null;
+    }
+
+    double IMarketable.BaseCost()
+    {
+        return staticData.cost;
     }
 }
 
