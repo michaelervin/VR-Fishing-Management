@@ -8,6 +8,7 @@ public class Float : MonoBehaviour
     [SerializeField] float buoyancyForce = 20f;
     [SerializeField] float waterDrag = 15;
     [SerializeField] float airDrag = 1;
+    public AudioClip bloop;
 
     Rigidbody rb;
 
@@ -31,6 +32,10 @@ public class Float : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             rb.drag = waterDrag;
+            if(rb.velocity.y < 0)
+            {
+                AudioSource.PlayClipAtPoint(bloop, rb.transform.position);
+            }
         }
     }
 
