@@ -97,11 +97,4 @@ public class FishMarketManager : MonoBehaviour
             fish.transform.position = spawnPoint.position;
         }
     }
-
-    public void Selling(Fish fish)
-    {
-        jerryBucksAmount.jerryBucks += fish.staticData.cost;
-        fish._hand?.DetachObject(fish.gameObject);
-        Destroy(fish.gameObject);
-    }
 }

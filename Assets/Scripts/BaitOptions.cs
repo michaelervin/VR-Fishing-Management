@@ -96,11 +96,4 @@ public class BaitOptions : MonoBehaviour
             target.transform.position = spawnPoint.position;
         }
     }
-
-    public void Selling(FishTarget target)
-    {
-        jerryBucksAmount.jerryBucks += target.staticData.cost;
-        target._hand?.DetachObject(target.gameObject);
-        Destroy(target.gameObject);
-    }
 }

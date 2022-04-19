@@ -59,10 +59,7 @@ public static class FishTargetSpawnerUtility
 
     public static IEnumerable<FishTargetStaticData> GetAllStaticData()
     {
-        foreach (string type in StaticData.Keys)
-        {
-            yield return StaticData[type];
-        }
+        return StaticData.Values;
     }
 }
 

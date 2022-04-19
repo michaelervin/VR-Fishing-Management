@@ -102,8 +102,6 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
         Debug.Log("Nom");
     }
 
-    // TODO: this _hand thing sucks
-    public Hand _hand;
     private void OnAttachedToHand(Hand hand)
     {
         if (attachedHook != null)
@@ -111,13 +109,11 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
             attachedHook.Detach(this);
         }
         rb.isKinematic = true;
-        _hand = hand;
     }
 
     private void OnDetachedFromHand(Hand hand)
     {
         rb.isKinematic = false;
-        _hand = null;
     }
 
     void IContainable.Contain<T>(ObjectContainer<T> container)

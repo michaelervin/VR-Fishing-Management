@@ -56,15 +56,12 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
         }
     }
     
-    // TODO: this _hand thing sucks
-    public Hand _hand;
     private void OnAttachedToHand(Hand hand)
     {
         if (attachedHook != null)
         {
             attachedHook.Detach(this);
         }
-        _hand = hand;
     }
 
     private void OnDetachedToHand(Hand hand)

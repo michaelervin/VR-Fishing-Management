@@ -12,9 +12,6 @@ public class FishingRodController : MonoBehaviour
     private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & (~Hand.AttachmentFlags.SnapOnAttach) & (~Hand.AttachmentFlags.DetachOthers) & (~Hand.AttachmentFlags.VelocityMovement);
     public SteamVR_Action_Boolean teleportAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Teleport");
 
-    private bool prevGrabEndState;
-    private bool firstGrabEnded;
-
     void Awake()
     {
         interactable = this.GetComponent<Interactable>();
@@ -31,13 +28,10 @@ public class FishingRodController : MonoBehaviour
             return;
         }
 
-        bool isGrabEnding = hand.IsGrabEnding(this.gameObject);
-
         if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
         {
             hand.HoverLock(interactable);
             hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
-            firstGrabEnded = false;
 
             return;
         }
@@ -52,7 +46,6 @@ public class FishingRodController : MonoBehaviour
             Debug.Log("reel");
             fishingRod.ReelBobber();
         }
-        prevGrabEndState = isGrabEnding;
     }
 
     private bool WasTeleportButtonReleased(Hand hand)
@@ -64,14 +57,9 @@ public class FishingRodController : MonoBehaviour
         else
         {
             return teleportAction.GetStateUp(hand.handType);
-
-            //return hand.controller.GetPressUp( SteamVR_Controller.ButtonMask.Touchpad );
         }
-
-        return false;
     }
 
-    //-------------------------------------------------
     private bool IsTeleportButtonDown(Hand hand)
     {
         if (hand.noSteamVRFallbackCamera != null)
@@ -82,7 +70,5 @@ public class FishingRodController : MonoBehaviour
         {
             return teleportAction.GetState(hand.handType);
         }
-
-        return false;
     }
 }
