@@ -34,26 +34,22 @@ public static class FishTargetSpawnerUtility
         }
     }
 
-    public static FishTarget CreateTarget(string type)
-    {
-        return CreateTarget((FishTargetType)System.Enum.Parse(typeof(FishTargetType), type));
-    }
-
-    public static FishTarget CreateTarget(FishTargetType type)
+    public static FishTarget CreateTarget(FishTargetData data)
     {
         FishTarget target = Object.Instantiate(BasePrefab).GetComponent<FishTarget>();
-        target.type = type;
+        target.data = data;
         GameObject prefab;
-        if (StaticData.ContainsKey(target.type.ToString()))
+        if (StaticData.ContainsKey(data.type != null ? data.type : ""))
         {
-            target.staticData = StaticData[target.type.ToString()];
-            prefab = StaticData[target.type.ToString()].modelPrefab;
+            target.staticData = StaticData[target.data.type];
+            prefab = StaticData[target.data.type].modelPrefab;
         }
         else
         {
-            Debug.LogWarning($"Static data not found: {target.type}. Defaulting to Larry...");
-            target.staticData = StaticData["Larry"];
-            prefab = StaticData["Larry"].modelPrefab;
+            Debug.LogWarning($"Static data not found: {target.data.type}. Defaulting to Jim...");
+            target.staticData = StaticData["Jim"];
+            target.data.type = "Jim";
+            prefab = StaticData["Jim"].modelPrefab;
         }
         GameObject model = Object.Instantiate(prefab);
         model.transform.parent = target.transform;
@@ -61,16 +57,11 @@ public static class FishTargetSpawnerUtility
         return target;
     }
 
-    public static FishTargetStaticData GetStaticData(FishTargetType type)
+    public static IEnumerable<FishTargetStaticData> GetAllStaticData()
     {
-        if (StaticData.ContainsKey(type.ToString()))
+        foreach (string type in StaticData.Keys)
         {
-            return StaticData[type.ToString()];
-        }
-        else
-        {
-            Debug.LogWarning($"Static data not found: {type}. Defaulting to Larry...");
-            return StaticData["Larry"];
+            yield return StaticData[type];
         }
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79517fe496597884298b628b4c9daaa6, type: 3}
-  m_Name: MinnowBait
+  m_Name: Minnow Bait
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 8702638405477579284, guid: b55a7223a53e2cc4b988cee620b49724, type: 3}
   sprite: {fileID: 21300000, guid: 42f7eb9d36d035f4ab18f56b188086bf, type: 3}

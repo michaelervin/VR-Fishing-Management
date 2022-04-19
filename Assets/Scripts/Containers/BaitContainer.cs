@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class BaitContainer : ObjectContainer<FishTarget>, ISavable
 {
-    public List<FishTargetType> baitData;
+    public List<FishTargetData> baitData;
 
     protected virtual void Awake()
     {
-        baitData = new List<FishTargetType>();
+        baitData = new List<FishTargetData>();
         onAdd += OnContainerAdd;
         onRemove += OnContainerRemove;
     }
 
     private void OnContainerAdd(FishTarget target)
     {
-        baitData.Add(target.type);
+        baitData.Add(target.data);
     }
 
     private void OnContainerRemove(FishTarget target)
     {
-        baitData.Remove(target.type);
+        baitData.Remove(target.data);
     }
 
     Type ISavable.GetSaveDataType()
@@ -31,7 +31,7 @@ public class BaitContainer : ObjectContainer<FishTarget>, ISavable
 
     void ISavable.OnFinishLoad()
     {
-        foreach (FishTargetType data in baitData)
+        foreach (FishTargetData data in baitData)
         {
             FishTarget target = FishTargetSpawnerUtility.CreateTarget(data);
             target.transform.position = transform.position;
@@ -44,6 +44,6 @@ public class BaitContainer : ObjectContainer<FishTarget>, ISavable
 
     class BaitContainerSaveData : SaveData
     {
-        public List<FishTargetType> baitData;
+        public List<FishTargetData> baitData;
     }
 }

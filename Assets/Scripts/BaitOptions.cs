@@ -25,11 +25,7 @@ public class BaitOptions : MonoBehaviour
 
     private void Start()
     {
-        foreach (FishTargetType type in Enum.GetValues(typeof(FishTargetType)))
-        {
-            if (type == FishTargetType.Unknown) continue;
-            luresList.Add(FishTargetSpawnerUtility.GetStaticData(type));
-        }
+        luresList.AddRange(FishTargetSpawnerUtility.GetAllStaticData());
 
         CreateImages();
     }
@@ -94,7 +90,9 @@ public class BaitOptions : MonoBehaviour
         if (jerryBucksAmount.jerryBucks >= luresList[luresListIndex].cost)
         {
             jerryBucksAmount.jerryBucks -= luresList[luresListIndex].cost;
-            FishTarget target = FishTargetSpawnerUtility.CreateTarget(luresList[luresListIndex].name);
+            FishTargetData data = new FishTargetData();
+            data.type = luresList[luresListIndex].name;
+            FishTarget target = FishTargetSpawnerUtility.CreateTarget(data);
             target.transform.position = spawnPoint.position;
         }
     }

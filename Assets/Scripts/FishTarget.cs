@@ -6,7 +6,7 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMarketable
 {
-    public FishTargetType type;
+    public FishTargetData data;
     public FishTargetStaticData staticData;
 
     float IContainable.RequiredSpace => 0;
@@ -82,7 +82,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     {
         DisplayInfo info = new DisplayInfo();
         info.image = null;
-        info.text = type.ToString();
+        info.text = data.type;
         return info;
     }
 
@@ -115,14 +115,4 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     {
         return staticData.cost;
     }
-}
-
-public enum FishTargetType
-{
-    Unknown,
-    Insect,
-    SmallFish,
-    Worm,
-    CrankBait,
-    MinnowBait,
 }

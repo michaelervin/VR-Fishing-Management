@@ -19,6 +19,7 @@ public class SaveData
 
     public static void Load(ISavable savable, string path)
     {
+        bool success = true;
         string filePath = Path.Combine(Application.persistentDataPath, path);
         if (File.Exists(filePath))
         {
@@ -28,11 +29,24 @@ public class SaveData
 
             foreach (var field in type.GetFields())
             {
+                var value = field.GetValue(data);
+                if (value == null)
+                {
+                    Debug.LogWarning($"{field.Name} failed to load from path: {path}");
+                    success = false;
+                }
                 var targetField = savable.GetType().GetField(field.Name);
-                targetField.SetValue(savable, field.GetValue(data));
+                try
+                {
+                    targetField.SetValue(savable, value);
+                }
+                catch (ArgumentException)
+                {
+                    Debug.LogError($"Field {field.Name} type does not match! Save path: {path}");
+                }
             }
         }
-
+        if (!success) return;
         savable.OnFinishLoad();
     }
 

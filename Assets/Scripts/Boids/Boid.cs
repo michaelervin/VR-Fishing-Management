@@ -29,7 +29,7 @@ public class Boid : MonoBehaviour {
     Transform cachedTransform;
     List<FishTarget> targets;
 
-    public List<FishTargetType> pursuedTargetTypes;
+    public List<string> pursuedTargetTypes;
 
     Rigidbody rb;
 
@@ -61,7 +61,7 @@ public class Boid : MonoBehaviour {
 
     public void AddTarget (FishTarget target)
     {
-        if (pursuedTargetTypes.Contains(target.type))
+        if (pursuedTargetTypes.Contains(target.data.type))
         {
             targets.Add(target);
         }
@@ -77,7 +77,7 @@ public class Boid : MonoBehaviour {
 
     public void RemoveTarget (FishTarget target)
     {
-        if (pursuedTargetTypes.Contains(target.type))
+        if (pursuedTargetTypes.Contains(target.data.type))
         {
             targets.Remove(target);
         }

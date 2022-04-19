@@ -8,3 +8,9 @@ public class FishData
     public string nickName;
     public float size;
 }
+
+[System.Serializable]
+public class FishTargetData
+{
+    public string type;
+}
