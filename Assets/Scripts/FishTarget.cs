@@ -11,7 +11,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
 
     float IContainable.RequiredSpace => 0;
 
-    [HideInInspector] public Rigidbody rb;
+    Rigidbody rb;
 
     BoidFishContainer container;
 
@@ -32,7 +32,6 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     void IContainable.Contain<T>(ObjectContainer<T> container)
     {
         Debug.Assert(container is BaitContainer);
-        rb.useGravity = false;
         rb.isKinematic = true;
     }
 
@@ -62,11 +61,11 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
         {
             attachedHook.Detach(this);
         }
+        rb.isKinematic = true;
     }
 
-    private void OnDetachedToHand(Hand hand)
+    private void OnDetachedFromHand(Hand hand)
     {
-        hand = null;
         rb.isKinematic = false;
     }
 

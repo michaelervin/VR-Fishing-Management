@@ -44,9 +44,12 @@ public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContai
 
     private void OnTriggerEnter(Collider other)
     {
+        if (_ignoredCol.Contains(other)) return;
         T containable = other.GetComponent<T>();
         if (containable != null)
         {
+            _ignoredCol.Add(other);
+            StartCoroutine(IgnoreNextCollision(other));
             if (!TryAdd(containable))
             {
                 Debug.LogWarning("Container has no space!");
@@ -54,8 +57,18 @@ public class ObjectContainer<T> : MonoBehaviour where T : MonoBehaviour, IContai
         }
     }
 
+    // Avoid triggering twice colliders that change isKinematic on collision TODO: find a better workaround? 
+    private List<Collider> _ignoredCol = new List<Collider>();
+    private IEnumerator IgnoreNextCollision(Collider other)
+    {
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        _ignoredCol.Remove(other);
+    }
+
     private void OnTriggerExit(Collider other)
     {
+        if (_ignoredCol.Contains(other)) return;
         T containable = other.GetComponent<T>();
         if (containable != null)
         {

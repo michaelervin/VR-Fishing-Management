@@ -99,6 +99,7 @@ MonoBehaviour:
     name: 
     nickName: 
     size: 0
+  staticData: {fileID: 11400000, guid: 9a4f97bb2f9e12d4ab261c8a2751d2e6, type: 2}
   container: {fileID: 0}
 --- !u!136 &2137066454712813505
 CapsuleCollider:
