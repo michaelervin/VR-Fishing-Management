@@ -58,8 +58,8 @@ public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IConta
             ContainerElementDisplay element = Instantiate(DisplayInfoPrefab);
             element.transform.SetParent(transform, false);
             element.transform.localPosition += new Vector3(0, i * spacing, 0);
-            element.Text = info.text;
-            element.SpriteImage = info.image;
+            element.Text = info.title;
+            element.SpriteImage = info.sprite;
             element.referenceObject = o.gameObject;
             elements.Add(element);
 
@@ -75,7 +75,8 @@ public interface IDisplayable
 
 public struct DisplayInfo
 {
-    public string text;
-    public Sprite image;
+    public string title;
+    public double cost;
+    public Sprite sprite;
 }
 

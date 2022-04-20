@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishStand : MonoBehaviour
 {
-    [SerializeField] Canvas display;
+    [SerializeField] MarketDisplay display;
     [SerializeField] FishSpawner spawner;
     [SerializeField] int availableCount;
     [SerializeField] float spacing;
@@ -18,9 +18,10 @@ public class FishStand : MonoBehaviour
         for (int i=0; i<availableCount; i++)
         {
             Fish fish = spawner.SpawnRandomFish();
-            fish.transform.position += fish.transform.right * i * spacing;
+            fish.transform.position += -fish.transform.right * i * spacing;
             availableFish.Add(fish);
         }
+        display.SetDisplay(availableFish[index]);
     }
 
     private void Update()
@@ -35,6 +36,7 @@ public class FishStand : MonoBehaviour
         {
             index = 0;
         }
+        display.SetDisplay(availableFish[index]);
     }
 
     public void PreviousIndex()
@@ -44,5 +46,6 @@ public class FishStand : MonoBehaviour
         {
             index = availableFish.Count - 1;
         }
+        display.SetDisplay(availableFish[index]);
     }
 }

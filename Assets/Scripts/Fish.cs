@@ -137,8 +137,9 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
     DisplayInfo IDisplayable.GetDisplayInfo()
     {
         DisplayInfo info = new DisplayInfo();
-        info.text = data.nickName;
-        info.image = FishDatabase.GetSprite(data.name);
+        info.title = data.name;
+        info.cost = staticData.cost;
+        info.sprite = staticData.sprite;
         return info;
     }
 
