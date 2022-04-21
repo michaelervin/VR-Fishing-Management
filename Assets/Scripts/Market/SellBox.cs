@@ -5,9 +5,9 @@ using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Collider))]
-public class SellBox : MonoBehaviour
+public class SellBox<T> : MonoBehaviour where T : MonoBehaviour, IContainable, IDisplayable
 {
-    [SerializeField] FishStand stand;
+    [SerializeField] MarketStand<T> stand;
 
     private void Awake()
     {
@@ -17,12 +17,12 @@ public class SellBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IMarketable marketable = other.GetComponent<IMarketable>();
-        if (marketable != null)
+        if (marketable != null && marketable is T)
         {
             Interactable interactable = other.GetComponent<Interactable>();
             interactable?.attachedToHand?.DetachObject(interactable.gameObject);
             other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            stand.Buy(marketable as Fish); // TODO: fix
+            stand.Buy(marketable as T);
         }
     }
 }

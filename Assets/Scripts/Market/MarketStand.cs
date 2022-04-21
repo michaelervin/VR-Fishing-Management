@@ -3,45 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class FishStand : MonoBehaviour
+public class MarketStand<T> : MonoBehaviour where T : MonoBehaviour, IContainable, IDisplayable
 {
     [SerializeField] JerryBank bank;
     [SerializeField] MarketDisplay display;
-    [SerializeField] FishSpawner spawner;
-    [SerializeField] float spacing;
     [SerializeField] GameObject pointer;
     [SerializeField] GameObject buyButton;
     [SerializeField] GameObject cantBuyText;
-    [SerializeField] List<Transform> inventorySlots;
+    [SerializeField] 
+    protected List<Transform> inventorySlots;
 
     Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.TurnOnKinematic;
-    List<Fish> availableFish = new List<Fish>();
+    protected List<T> availableItems = new List<T>();
     int index = 0;
 
-    Fish SelectedFish
+    T SelectedItem
     {
-        get => availableFish[index];
-        set => availableFish[index] = value;
-    }
-
-    private void Start()
-    {
-        for (int i = 0; i < inventorySlots.Count; i++)
-        {
-            Fish fish = spawner.SpawnRandomFish();
-            fish.transform.position = inventorySlots[i].position;
-            fish.transform.rotation = inventorySlots[i].rotation;
-            availableFish.Add(fish);
-        }
-        RefreshDisplay();
-    }
+        get => availableItems[index];
+        set => availableItems[index] = value;
+    }    
 
     private void Update()
     {
-        if (SelectedFish)
+        if (SelectedItem)
         {
             buyButton.SetActive(true);
-            pointer.transform.position = SelectedFish.transform.position + Vector3.up / 2;
+            pointer.transform.position = SelectedItem.transform.position + Vector3.up / 2;
         }
         else
         {
@@ -56,13 +43,13 @@ public class FishStand : MonoBehaviour
     /// <param name="hand"></param>
     public void Sell(Hand hand)
     {
-        double cost = (SelectedFish as IMarketable).BaseCost();
+        double cost = (SelectedItem as IMarketable).BaseCost();
         if (cost <= bank.jerryBucks)
         {
             bank.jerryBucks -= cost;
-            SelectedFish.transform.position = hand.transform.position;
-            hand.AttachObject(SelectedFish.gameObject, hand.GetBestGrabbingType(), attachmentFlags);
-            SelectedFish = null;
+            SelectedItem.transform.position = hand.transform.position;
+            hand.AttachObject(SelectedItem.gameObject, hand.GetBestGrabbingType(), attachmentFlags);
+            SelectedItem = null;
             RefreshDisplay();
         }
         else
@@ -75,32 +62,32 @@ public class FishStand : MonoBehaviour
     /// Buy from the player
     /// </summary>
     /// <param name="fish"></param>
-    public void Buy(Fish fish)
+    public void Buy(T item)
     {
-        bank.jerryBucks += (fish as IMarketable).BaseCost();
-        for (int i = 0; i < availableFish.Count; i++)
+        bank.jerryBucks += (item as IMarketable).BaseCost();
+        for (int i = 0; i < availableItems.Count; i++)
         {
-            if (availableFish[i] == null)
+            if (availableItems[i] == null)
             {
-                fish.transform.position = inventorySlots[i].position;
-                fish.transform.rotation = inventorySlots[i].rotation;
-                availableFish[i] = fish;
+                item.transform.position = inventorySlots[i].position;
+                item.transform.rotation = inventorySlots[i].rotation;
+                availableItems[i] = item;
                 break;
             }
         }
         RefreshDisplay();
     }
 
-    private void RefreshDisplay()
+    protected void RefreshDisplay()
     {
-        display.SetDisplay(SelectedFish);
+        display.SetDisplay(SelectedItem);
         cantBuyText.SetActive(false);
     }
 
     public void NextIndex()
     {
         index++;
-        if(index > availableFish.Count - 1)
+        if(index > availableItems.Count - 1)
         {
             index = 0;
         }
@@ -112,7 +99,7 @@ public class FishStand : MonoBehaviour
         index--;
         if(index < 0)
         {
-            index = availableFish.Count - 1;
+            index = availableItems.Count - 1;
         }
         RefreshDisplay();
     }
