@@ -77,8 +77,9 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     DisplayInfo IDisplayable.GetDisplayInfo()
     {
         DisplayInfo info = new DisplayInfo();
-        info.sprite = null;
+        info.sprite = staticData.sprite;
         info.title = data.type;
+        info.cost = staticData.cost;
         return info;
     }
 
