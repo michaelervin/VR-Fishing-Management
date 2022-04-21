@@ -20,7 +20,7 @@ public class MarketDisplay : MonoBehaviour
         }
         else
         {
-            displayName.text = "No Fish";
+            displayName.text = "Select and item";
             cost.text = $"";
             image.sprite = null;
         }
