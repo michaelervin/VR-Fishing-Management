@@ -1005,6 +1005,12 @@ MonoBehaviour:
   - {fileID: 6029998504849067712}
   - {fileID: 5108713543330841012}
   - {fileID: 4579892080717829681}
+  allowedBait:
+  - Crank Bait
+  - Insect
+  - Minnow Bait
+  - Small Fish
+  - Worm
 --- !u!1 &7628421120157802103
 GameObject:
   m_ObjectHideFlags: 0

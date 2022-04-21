@@ -31,7 +31,6 @@ Transform:
   - {fileID: 9005462573410211419}
   - {fileID: 6481443357983910155}
   - {fileID: 1264432072711902710}
-  - {fileID: 5490343263354299373}
   - {fileID: 7781735120942700750}
   - {fileID: 501221687937997903}
   - {fileID: 6236033974097534309}
@@ -64,7 +63,10 @@ MonoBehaviour:
   - {fileID: 5077268285204188023}
   - {fileID: 755309032732492805}
   - {fileID: 5743707960574406785}
-  spawner: {fileID: 7464272414146651186}
+  allowedFish:
+  - Bluegill
+  - Yellow Perch
+  - Sunfish
 --- !u!1 &544490346711909965
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +97,7 @@ Transform:
   m_LocalScale: {x: 2.49, y: 0.67230326, z: 1}
   m_Children: []
   m_Father: {fileID: 8112271178072182512}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &529897977847429935
 MeshFilter:
@@ -235,7 +237,7 @@ Transform:
   m_LocalScale: {x: 4.1136, y: 2.646, z: 0.15412}
   m_Children: []
   m_Father: {fileID: 8112271178072182512}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7891459019268850643
 BoxCollider:
@@ -358,7 +360,7 @@ Transform:
   m_LocalScale: {x: 2.49, y: 0.16, z: 1}
   m_Children: []
   m_Father: {fileID: 8112271178072182512}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7597285295042255843
 BoxCollider:
@@ -477,7 +479,7 @@ Transform:
   m_LocalScale: {x: 0.7403174, y: 0.67230326, z: 1}
   m_Children: []
   m_Father: {fileID: 8112271178072182512}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1562132664702490748
 SpriteRenderer:
@@ -785,7 +787,7 @@ RectTransform:
   - {fileID: 6690972128456743437}
   - {fileID: 4930611300648406434}
   m_Father: {fileID: 8112271178072182512}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1063,57 +1065,6 @@ Transform:
   m_Father: {fileID: 8112271178072182512}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8478382425167364728
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5490343263354299373}
-  - component: {fileID: 7464272414146651186}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5490343263354299373
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8478382425167364728}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.58599997, y: 0.32999998, z: 0.656}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8112271178072182512}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &7464272414146651186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8478382425167364728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e0e63624b9f3c4097033fbd5bd9813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishData:
-    name: 
-    nickName: 
-    size: 0
-  container: {fileID: 0}
-  spawnOnStartCount: 0
-  spawnTimeIncrement: 1
-  spawnTimeOffset: 0.5
 --- !u!1001 &1721052804534754016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1127,7 +1078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5449588321161736939, guid: de60dce5e3cb0a44dad0d6bc66fd71fe, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5449588321161736939, guid: de60dce5e3cb0a44dad0d6bc66fd71fe, type: 3}
       propertyPath: m_LocalScale.x
