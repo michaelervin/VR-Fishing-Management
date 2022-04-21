@@ -65,6 +65,7 @@ public class MarketStand<T> : MonoBehaviour where T : MonoBehaviour, IContainabl
     public void Buy(T item)
     {
         bank.jerryBucks += (item as IMarketable).BaseCost();
+        bool foundSlot = false;
         for (int i = 0; i < availableItems.Count; i++)
         {
             if (availableItems[i] == null)
@@ -72,8 +73,13 @@ public class MarketStand<T> : MonoBehaviour where T : MonoBehaviour, IContainabl
                 item.transform.position = inventorySlots[i].position;
                 item.transform.rotation = inventorySlots[i].rotation;
                 availableItems[i] = item;
+                foundSlot = true;
                 break;
             }
+        }
+        if (!foundSlot)
+        {
+            Destroy(item.gameObject);
         }
         RefreshDisplay();
     }
