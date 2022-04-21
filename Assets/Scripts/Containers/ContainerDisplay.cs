@@ -59,7 +59,6 @@ public class ContainerDisplay<T> : MonoBehaviour where T : MonoBehaviour, IConta
             element.transform.SetParent(transform, false);
             element.transform.localPosition += new Vector3(0, i * spacing, 0);
             element.Text = info.title;
-            element.SpriteImage = info.sprite;
             element.referenceObject = o.gameObject;
             elements.Add(element);
 

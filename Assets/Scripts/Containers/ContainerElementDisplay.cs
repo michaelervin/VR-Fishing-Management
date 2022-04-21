@@ -7,18 +7,12 @@ using Valve.VR.InteractionSystem;
 
 public class ContainerElementDisplay : MonoBehaviour
 {
-    [SerializeField] Image image;
     [SerializeField] Text text;
     [SerializeField] UIElement uiElement;
 
     Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
     [HideInInspector] 
     public GameObject referenceObject;
-
-    public Sprite SpriteImage
-    {
-        set => image.sprite = value;
-    }
 
     public string Text
     {
