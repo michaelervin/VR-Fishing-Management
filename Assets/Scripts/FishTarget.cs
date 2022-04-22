@@ -13,6 +13,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IMarketable
 
     Rigidbody rb;
     Collider col;
+    Interactable interactable;
 
     BoidFishContainer container;
 
@@ -23,6 +24,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IMarketable
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        interactable = GetComponent<Interactable>();
     }
 
     public void EnableCollider(bool enabled)
@@ -69,14 +71,11 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IMarketable
             attachedHook.RemoveLure();
         }
         rb.isKinematic = true;
-        _hand = hand;
     }
 
-    Hand _hand = null;
     private void OnDetachedFromHand(Hand hand)
     {
         rb.isKinematic = false;
-        _hand = null;
     }
 
     void IContainable.Release()
@@ -99,7 +98,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IMarketable
         follow.followTransform = hook.transform;
         attachedHook = hook;
         transform.rotation = hook.transform.rotation;
-        if(_hand) _hand.DetachObject(gameObject);
+        if(interactable.attachedToHand) interactable.attachedToHand.DetachObject(gameObject);
     }
 
     public void DetachHook()

@@ -16,6 +16,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
     /// </summary>
     Boid boid;
     Rigidbody rb;
+    Interactable interactable;
     Hook attachedHook;
 
     float IContainable.RequiredSpace => data.size;
@@ -24,6 +25,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
     {
         rb = GetComponent<Rigidbody>();
         boid = GetComponent<Boid>();
+        interactable = GetComponent<Interactable>();
     }
 
     public Boid AddBoidComponent()
@@ -69,6 +71,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
 
     void IAttachable.Attach(Hook hook)
     {
+        if(interactable.attachedToHand) interactable.attachedToHand.DetachObject(gameObject);
         attachedHook = hook;
         if (boid != null)
         {
@@ -76,7 +79,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
         }
         rb.isKinematic = true;
 
-        StartCoroutine(TugHook(hook));
+        if(boid) StartCoroutine(TugHook(hook));
     }
 
     void IAttachable.Detach()
