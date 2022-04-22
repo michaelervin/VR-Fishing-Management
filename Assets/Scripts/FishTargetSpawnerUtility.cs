@@ -46,10 +46,8 @@ public static class FishTargetSpawnerUtility
         }
         else
         {
-            Debug.LogWarning($"Static data not found: {target.data.type}. Defaulting to Jim...");
-            target.staticData = StaticData["Jim"];
-            target.data.type = "Jim";
-            prefab = StaticData["Jim"].modelPrefab;
+            Debug.LogWarning($"Static data not found: {target.data.type}.");
+            return null;
         }
         GameObject model = Object.Instantiate(prefab);
         model.transform.parent = target.transform;

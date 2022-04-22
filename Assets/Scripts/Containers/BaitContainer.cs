@@ -34,7 +34,7 @@ public class BaitContainer : ObjectContainer<FishTarget>, ISavable
         foreach (FishTargetData data in baitData)
         {
             FishTarget target = FishTargetSpawnerUtility.CreateTarget(data);
-            target.transform.position = transform.position;
+            if(target) target.transform.position = transform.position;
         }
 
         // Arrays will be repopulated on collision with fish

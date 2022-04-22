@@ -1,16 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Hook : MonoBehaviour
+public class Hook : MonoBehaviour, ISavable
 {
     public Rigidbody bobber;
 
     public AudioClip fishingBellSound;
 
     List<IAttachable> attachedObjects = new List<IAttachable>();
-    FishTarget lure = null;
+    FishTarget _lure = null;
+    FishTarget Lure
+    {
+        get => _lure;
+        set
+        {
+            _lure = value;
+            lureData = _lure ? _lure.data : null;
+        }
+    }
+    public FishTargetData lureData;
     GameObject unattachableTemp;
 
     GameObject _visualObject;
@@ -28,7 +39,7 @@ public class Hook : MonoBehaviour
     {
         attachedObjects.Add(attachable);
         attachable.Attach(this);
-        if(lure) lure.EnableCollider(false);
+        if(Lure) Lure.EnableCollider(false);
     }
 
     public void Detach(IAttachable attachable)
@@ -37,12 +48,12 @@ public class Hook : MonoBehaviour
         attachedObjects.Remove(attachable);
         unattachableTemp = (attachable as MonoBehaviour).gameObject;
         StartCoroutine(CooldownUnattachableTemp());
-        if (lure && attachedObjects.Count == 0) lure.EnableCollider(true);
+        if (Lure && attachedObjects.Count == 0) Lure.EnableCollider(true);
     }
 
     private void AddLure(FishTarget fishTarget)
     {
-        lure = fishTarget;
+        Lure = fishTarget;
         fishTarget.AttachHook(this);
         if (fishTarget.staticData.hideHook)
         {
@@ -52,9 +63,9 @@ public class Hook : MonoBehaviour
 
     public void RemoveLure()
     {
-        lure.DetachHook();
-        unattachableTemp = lure.gameObject;
-        lure = null;
+        Lure.DetachHook();
+        unattachableTemp = Lure.gameObject;
+        Lure = null;
         Visable = true;
         StartCoroutine(CooldownUnattachableTemp());
     }
@@ -74,10 +85,25 @@ public class Hook : MonoBehaviour
         }
 
         FishTarget fishTarget = other.GetComponent<FishTarget>();
-        if (fishTarget != null && other.gameObject != unattachableTemp && lure == null)
+        if (fishTarget != null && other.gameObject != unattachableTemp && Lure == null)
         {
             AddLure(fishTarget);
         }
+    }
+
+    Type ISavable.GetSaveDataType()
+    {
+        return typeof(HookSaveData);
+    }
+
+    void ISavable.OnFinishLoad()
+    {
+        Lure = FishTargetSpawnerUtility.CreateTarget(lureData);
+    }
+
+    class HookSaveData : SaveData
+    {
+        public FishTargetData lureData;
     }
 }
 
