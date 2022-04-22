@@ -10,10 +10,11 @@ public class Hook : MonoBehaviour
     public AudioClip fishingBellSound;
 
     List<IAttachable> attachedObjects = new List<IAttachable>();
-    IAttachable unattachableTemp;
+    FishTarget lure = null;
+    GameObject unattachableTemp;
 
     GameObject _visualObject;
-    public bool Visable
+    bool Visable
     {
         set => _visualObject.SetActive(value);
     }
@@ -23,17 +24,38 @@ public class Hook : MonoBehaviour
         _visualObject = transform.GetChild(0).gameObject;
     }
 
-    public void Attach(IAttachable attachable)
+    private void Attach(IAttachable attachable)
     {
         attachedObjects.Add(attachable);
         attachable.Attach(this);
+        if(lure) lure.EnableCollider(false);
     }
 
     public void Detach(IAttachable attachable)
     {
         attachable.Detach();
         attachedObjects.Remove(attachable);
-        unattachableTemp = attachable;
+        unattachableTemp = (attachable as MonoBehaviour).gameObject;
+        StartCoroutine(CooldownUnattachableTemp());
+        if (lure && attachedObjects.Count == 0) lure.EnableCollider(true);
+    }
+
+    private void AddLure(FishTarget fishTarget)
+    {
+        lure = fishTarget;
+        fishTarget.AttachHook(this);
+        if (fishTarget.staticData.hideHook)
+        {
+            Visable = false;
+        }
+    }
+
+    public void RemoveLure()
+    {
+        lure.DetachHook();
+        unattachableTemp = lure.gameObject;
+        lure = null;
+        Visable = true;
         StartCoroutine(CooldownUnattachableTemp());
     }
 
@@ -46,9 +68,15 @@ public class Hook : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IAttachable attachable = other.GetComponent<IAttachable>();
-        if (attachable != null && attachable != unattachableTemp && !attachedObjects.Contains(attachable))
+        if (attachable != null && other.gameObject != unattachableTemp && !attachedObjects.Contains(attachable))
         {
             Attach(attachable);
+        }
+
+        FishTarget fishTarget = other.GetComponent<FishTarget>();
+        if (fishTarget != null && other.gameObject != unattachableTemp && lure == null)
+        {
+            AddLure(fishTarget);
         }
     }
 }

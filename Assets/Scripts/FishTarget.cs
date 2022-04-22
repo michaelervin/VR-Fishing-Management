@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMarketable
+public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IMarketable
 {
     public FishTargetData data;
     public FishTargetStaticData staticData;
@@ -12,6 +12,7 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     float IContainable.RequiredSpace => 0;
 
     Rigidbody rb;
+    Collider col;
 
     BoidFishContainer container;
 
@@ -21,12 +22,18 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
+    }
+
+    public void EnableCollider(bool enabled)
+    {
+        col.enabled = enabled;
     }
 
     private void OnDestroy()
     {
-        container?.Remove(this);
-        attachedHook?.Detach(this);
+        if(container) container.Remove(this);
+        if(attachedHook) attachedHook.RemoveLure();
     }
 
     void IContainable.Contain<T>(ObjectContainer<T> container)
@@ -59,14 +66,17 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
     {
         if (attachedHook != null)
         {
-            attachedHook.Detach(this);
+            attachedHook.RemoveLure();
         }
         rb.isKinematic = true;
+        _hand = hand;
     }
 
+    Hand _hand = null;
     private void OnDetachedFromHand(Hand hand)
     {
         rb.isKinematic = false;
+        _hand = null;
     }
 
     void IContainable.Release()
@@ -83,27 +93,19 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IAttachable
         return info;
     }
 
-    void IAttachable.Attach(Hook hook)
+    public void AttachHook(Hook hook)
     {
         follow = gameObject.AddComponent<Follow>();
         follow.followTransform = hook.transform;
         attachedHook = hook;
-        if (staticData.hideHook)
-        {
-            hook.Visable = false;
-        }
+        transform.rotation = hook.transform.rotation;
+        if(_hand) _hand.DetachObject(gameObject);
     }
 
-    void IAttachable.Detach()
+    public void DetachHook()
     {
         Destroy(follow);
         follow = null;
-
-        if (staticData.hideHook)
-        {
-            // TODO: This doesn't account for other attached objects making it invisible
-            attachedHook.Visable = true;
-        }
 
         attachedHook = null;
     }
