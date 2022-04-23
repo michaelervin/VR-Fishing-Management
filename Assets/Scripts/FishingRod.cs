@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class FishingRod : MonoBehaviour
 {
-    [SerializeField] VelocityTracker tip;
+    [SerializeField] VelocityEstimator tip;
     [SerializeField] Rigidbody bobber;
     [SerializeField] Hook hook;
     [SerializeField] float reelTime = 1;
@@ -17,6 +18,7 @@ public class FishingRod : MonoBehaviour
         bobber.useGravity = false;
         isReeling = false;
         isReeled = true;
+        tip.BeginEstimatingVelocity();
     }
 
     private void FixedUpdate()
@@ -33,11 +35,7 @@ public class FishingRod : MonoBehaviour
         {
             isReeled = false;
             bobber.useGravity = true;
-            bobber.velocity = tip.velocity;
-        }
-        else
-        {
-            Debug.LogWarning("Tried to launch the bobber while reeling");
+            bobber.velocity = tip.GetVelocityEstimate();
         }
     }
 

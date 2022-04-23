@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2883652798732558451}
   - component: {fileID: 5424248410964540513}
   - component: {fileID: 7123879669089464288}
-  - component: {fileID: 8365687449229097888}
+  - component: {fileID: 2877710954551807710}
   m_Layer: 0
   m_Name: Tip
   m_TagString: Untagged
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
---- !u!114 &8365687449229097888
+--- !u!114 &2877710954551807710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,10 +153,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4203114393555159340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7b29be00c350743a80a47a900e5f78, type: 3}
+  m_Script: {fileID: 11500000, guid: 783750eec4c41da428b7651515146d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
+  velocityAverageFrames: 5
+  angularVelocityAverageFrames: 11
+  estimateOnAwake: 0
 --- !u!1 &8928920319942205059
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5b8afd506838b4b829f783b4846898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tip: {fileID: 8365687449229097888}
+  tip: {fileID: 2877710954551807710}
   bobber: {fileID: 0}
   hook: {fileID: 0}
   reelTime: 1
@@ -221,6 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ac557a10633cc4f8600b17ef8b7b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportAction:
+    actionPath: /actions/default/in/Teleport
+    needsReinit: 0
 --- !u!114 &6964440334457529401
 MonoBehaviour:
   m_ObjectHideFlags: 0
