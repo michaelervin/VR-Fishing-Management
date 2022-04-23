@@ -12,7 +12,7 @@ public class Hook : MonoBehaviour, ISavable
 
     List<IAttachable> attachedObjects = new List<IAttachable>();
     FishTarget _lure = null;
-    FishTarget Lure
+    public FishTarget Lure
     {
         get => _lure;
         set

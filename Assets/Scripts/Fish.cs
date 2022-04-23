@@ -72,12 +72,18 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
     void IAttachable.Attach(Hook hook)
     {
         if(interactable.attachedToHand) interactable.attachedToHand.DetachObject(gameObject);
+
         attachedHook = hook;
         if (boid != null)
         {
             boid.enabled = false;
         }
         rb.isKinematic = true;
+
+        if (hook.Lure.staticData.consumable)
+        {
+            Eat(hook.Lure);
+        }
 
         if(boid) StartCoroutine(TugHook(hook));
     }
