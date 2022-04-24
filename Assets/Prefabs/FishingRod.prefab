@@ -210,7 +210,7 @@ MonoBehaviour:
   tip: {fileID: 2877710954551807710}
   bobber: {fileID: 0}
   hook: {fileID: 0}
-  reelTime: 1
+  reelSpeed: 0.05
 --- !u!114 &3196458495997651215
 MonoBehaviour:
   m_ObjectHideFlags: 0

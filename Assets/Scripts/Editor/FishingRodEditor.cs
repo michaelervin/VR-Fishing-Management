@@ -13,9 +13,9 @@ public class FishingRodEditor : Editor
         if (!EditorApplication.isPlaying) return;
 
         FishingRod fishingRod = (FishingRod)target;
-        if(GUILayout.Button("Launch Bobber"))
+        if(GUILayout.Button("Release Bobber"))
         {
-            fishingRod.LaunchBobber();
+            fishingRod.ReleaseBobber();
         }
         if (GUILayout.Button("Reel Bobber"))
         {

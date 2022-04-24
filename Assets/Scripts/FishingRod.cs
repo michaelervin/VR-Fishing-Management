@@ -8,15 +8,13 @@ public class FishingRod : MonoBehaviour
     [SerializeField] VelocityEstimator tip;
     [SerializeField] Rigidbody bobber;
     [SerializeField] Hook hook;
-    [SerializeField] float reelTime = 1;
+    [SerializeField] float reelSpeed = 0.01f;
 
-    bool isReeling;
     bool isReeled;
 
     void Start()
     {
         bobber.useGravity = false;
-        isReeling = false;
         isReeled = true;
         tip.BeginEstimatingVelocity();
     }
@@ -29,37 +27,43 @@ public class FishingRod : MonoBehaviour
         }
     }
 
-    public void LaunchBobber()
+    public void ReleaseBobber()
     {
-        if (!isReeling)
+        if (isReeled)
         {
-            isReeled = false;
-            bobber.useGravity = true;
-            bobber.velocity = tip.GetVelocityEstimate();
+            LaunchBobber();
         }
+        else
+        {
+            StopReeling();
+        }
+    }
+
+    private void LaunchBobber()
+    {
+        isReeled = false;
+        bobber.useGravity = true;
+        bobber.velocity = tip.GetVelocityEstimate();
     }
 
     public void ReelBobber()
     {
         if (!isReeled)
         {
-            StartCoroutine(ReelBobberCoroutine());
+            bobber.useGravity = false;
+            bobber.MovePosition(Vector3.MoveTowards(bobber.position, tip.transform.position, reelSpeed));
         }
     }
 
-    private IEnumerator ReelBobberCoroutine()
+    private void StopReeling()
     {
-        isReeling = true;
-        bobber.useGravity = false;
-        Vector3 originalPosition = bobber.transform.position;
-
-        for (float i = 0; i < reelTime; i += Time.deltaTime)
+        if ((bobber.position - tip.transform.position).sqrMagnitude < 1)
         {
-            bobber.transform.position = Vector3.Lerp(originalPosition, tip.transform.position, i / reelTime);
-            yield return null;
+            isReeled = true;
         }
-        bobber.velocity = Vector3.zero;
-        isReeling = false;
-        isReeled = true;
+        else
+        {
+            bobber.useGravity = true;
+        }
     }
 }

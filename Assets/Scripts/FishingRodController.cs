@@ -38,12 +38,10 @@ public class FishingRodController : MonoBehaviour
 
         if (WasTeleportButtonReleased(hand))
         {
-            Debug.Log("Launch");
-            fishingRod.LaunchBobber();
+            fishingRod.ReleaseBobber();
         }
         else if(IsTeleportButtonDown(hand))
         {
-            Debug.Log("reel");
             fishingRod.ReelBobber();
         }
     }
