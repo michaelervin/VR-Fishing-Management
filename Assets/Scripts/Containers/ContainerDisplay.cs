@@ -75,6 +75,8 @@ public interface IDisplayable
 public struct DisplayInfo
 {
     public string title;
+    public string subTitle;
+    public string description;
     public double cost;
     public Sprite sprite;
 }

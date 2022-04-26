@@ -17,3 +17,4 @@ MonoBehaviour:
   cost: 69
   targetTypes:
   - Jim
+  description: Jerry is a pretty cool guy. He eats Jims though, which is not so cool.

@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    name: 
-    nickName: 
+    name: Jerry
+    nickName: Fishy
     size: 0
   staticData: {fileID: 11400000, guid: 9a4f97bb2f9e12d4ab261c8a2751d2e6, type: 2}
   container: {fileID: 0}

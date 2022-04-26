@@ -9,4 +9,5 @@ public class FishStaticData : ScriptableObject
     public Sprite sprite;
     public double cost;
     public List<string> targetTypes;
+    public string description;
 }
