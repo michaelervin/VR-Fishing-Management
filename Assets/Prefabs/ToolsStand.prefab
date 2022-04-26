@@ -944,6 +944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0569724dcdfd83c42b75c22ef75076c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buySound: {fileID: 8300000, guid: bbc1d678dc4877e4585be595e2ae5544, type: 3}
+  sellSound: {fileID: 8300000, guid: cdc44d0ff12b913428b60860ba71e2f3, type: 3}
+  errorSound: {fileID: 8300000, guid: 8313ecbfd03083547a8b40956eb9ff91, type: 3}
   bank: {fileID: 0}
   display: {fileID: 1997621925807072581}
   pointer: {fileID: 1896955738138225046}

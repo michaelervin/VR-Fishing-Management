@@ -5,6 +5,9 @@ using Valve.VR.InteractionSystem;
 
 public class MarketStand<T> : MonoBehaviour where T : MonoBehaviour, IContainable, IDisplayable
 {
+    [SerializeField] AudioClip buySound;
+    [SerializeField] AudioClip sellSound;
+    [SerializeField] AudioClip errorSound;
     [SerializeField] JerryBank bank;
     [SerializeField] MarketDisplay display;
     [SerializeField] GameObject pointer;
@@ -51,10 +54,12 @@ public class MarketStand<T> : MonoBehaviour where T : MonoBehaviour, IContainabl
             hand.AttachObject(SelectedItem.gameObject, hand.GetBestGrabbingType(), attachmentFlags);
             SelectedItem = null;
             RefreshDisplay();
+            AudioSource.PlayClipAtPoint(buySound, transform.position);
         }
         else
         {
             cantBuyText.SetActive(true);
+            AudioSource.PlayClipAtPoint(errorSound, transform.position);
         }
     }
 
@@ -82,6 +87,7 @@ public class MarketStand<T> : MonoBehaviour where T : MonoBehaviour, IContainabl
             Destroy(item.gameObject);
         }
         RefreshDisplay();
+        AudioSource.PlayClipAtPoint(sellSound, transform.position);
     }
 
     protected void RefreshDisplay()
