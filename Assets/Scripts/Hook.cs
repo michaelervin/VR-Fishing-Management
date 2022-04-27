@@ -98,7 +98,11 @@ public class Hook : MonoBehaviour, ISavable
 
     void ISavable.OnFinishLoad()
     {
-        Lure = FishTargetSpawnerUtility.CreateTarget(lureData);
+        FishTarget target = FishTargetSpawnerUtility.CreateTarget(lureData);
+        if (target)
+        {
+            AddLure(target);
+        }
     }
 
     class HookSaveData : SaveData

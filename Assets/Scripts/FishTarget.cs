@@ -35,7 +35,12 @@ public class FishTarget : MonoBehaviour, IContainable, IDisplayable, IMarketable
     private void OnDestroy()
     {
         if(container) container.Remove(this);
-        if(attachedHook) attachedHook.RemoveLure();
+    }
+
+    public void OnEat()
+    {
+        if (attachedHook) attachedHook.RemoveLure();
+        Destroy(gameObject);
     }
 
     void IContainable.Contain<T>(ObjectContainer<T> container)

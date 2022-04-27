@@ -107,7 +107,7 @@ public class Fish : MonoBehaviour, IContainable, IDisplayable, IAttachable, IMar
         {
             ((BoidFishContainer)container).Remove(fishFood);
         }
-        Destroy(fishFood.gameObject);
+        fishFood.OnEat();
         Debug.Log("Nom");
     }
 
