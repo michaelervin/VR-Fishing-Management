@@ -32,7 +32,7 @@ public class Float : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             rb.drag = waterDrag;
-            if(rb.velocity.y < 0)
+            if(rb.velocity.y < -5)
             {
                 AudioSource.PlayClipAtPoint(bloop, rb.transform.position);
             }
