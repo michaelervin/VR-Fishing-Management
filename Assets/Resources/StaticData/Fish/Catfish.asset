@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
+  m_Name: Catfish
+  m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 7000043770733870592, guid: 0785c780b723e4a488ac1732bba2a1db, type: 3}
+  sprite: {fileID: 0}
+  cost: 15
+  targetTypes:
+  - Small Fish
+  - Insect
+  - Worm
+  description: 'This fish eats just about anything, mostly live baits though. They
+    tend to prefer to sit towards the bottom which is why some call them bottom feeders
+    or "garbage fish". The blue catfish is known to be caught with fish sticking
+    out of its mouth because they never stop eatting. '

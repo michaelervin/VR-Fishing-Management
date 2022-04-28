@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 164349616}
   - component: {fileID: 164349615}
   m_Layer: 0
-  m_Name: Spawner (1)
+  m_Name: Yellow Perch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1678,6 +1678,57 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &645882139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 645882140}
+  - component: {fileID: 645882141}
+  m_Layer: 0
+  m_Name: Bull Shark
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &645882140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645882139}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.78, y: -2.84, z: 5.717}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1713696654}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645882141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645882139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e0e63624b9f3c4097033fbd5bd9813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData:
+    name: Bull Shark
+    nickName: Bruce
+    size: 3
+  container: {fileID: 1222660234}
+  spawnOnStartCount: 1
+  spawnTimeIncrement: 2
+  spawnTimeOffset: 1
 --- !u!114 &660310705 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
@@ -2948,7 +2999,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 466211506190226227, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: capacity
-      value: 20
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 1376684259457544721, guid: 1b454c43542d06f429308aac14af4565, type: 3}
       propertyPath: m_LocalScale.x
@@ -3380,7 +3431,7 @@ GameObject:
   - component: {fileID: 1323619907}
   - component: {fileID: 1323619906}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Bluegill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3420,6 +3471,57 @@ Transform:
   m_Father: {fileID: 1713696654}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1334559318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1334559319}
+  - component: {fileID: 1334559320}
+  m_Layer: 0
+  m_Name: Catfish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1334559319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334559318}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.04, y: -4.28, z: 7.639}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1713696654}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334559320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334559318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e0e63624b9f3c4097033fbd5bd9813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData:
+    name: Catfish
+    nickName: Garfield
+    size: 1
+  container: {fileID: 1222660234}
+  spawnOnStartCount: 5
+  spawnTimeIncrement: 2
+  spawnTimeOffset: 1
 --- !u!1 &1338773085
 GameObject:
   m_ObjectHideFlags: 0
@@ -4233,7 +4335,7 @@ GameObject:
   - component: {fileID: 1662980705}
   - component: {fileID: 1662980704}
   m_Layer: 0
-  m_Name: Spawner (2)
+  m_Name: Sunfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4430,6 +4532,8 @@ Transform:
   - {fileID: 1323619907}
   - {fileID: 164349616}
   - {fileID: 1662980705}
+  - {fileID: 645882140}
+  - {fileID: 1334559319}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

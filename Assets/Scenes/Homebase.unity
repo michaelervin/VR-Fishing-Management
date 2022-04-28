@@ -6548,6 +6548,8 @@ MonoBehaviour:
   - Bluegill
   - Yellow Perch
   - Sunfish
+  - Catfish
+  - Bull Shark
   winText: {fileID: 262555984}
   winSound: {fileID: 8300000, guid: d978ed73cdcf5fc4b9de269302bb98ce, type: 3}
 --- !u!4 &1733816264
