@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
-  m_Name: GoldenJerry
+  m_Name: Golden Jerry
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 8881701875790964946, guid: b89c105b69c493a4caa17b13d835eb30, type: 3}
   sprite: {fileID: 0}
