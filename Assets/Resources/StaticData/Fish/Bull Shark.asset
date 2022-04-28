@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bull Shark
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 490555233038475935, guid: 4006f1feaed873e4ebd36239cf2f130b, type: 3}
-  sprite: {fileID: 21300000, guid: c72226969d4885f418fd10aa577ce28b, type: 3}
+  sprite: {fileID: 21300000, guid: 612d1abfe59da304abd13d2bb6f13557, type: 3}
   cost: 100
   targetTypes:
   - Small Fish

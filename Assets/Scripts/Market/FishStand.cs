@@ -39,7 +39,7 @@ public class FishStand : MarketStand<Fish>
         return fish;
     }
 
-    string[] randomNames = new string[] { "George", "Fred", "Phil", "Tom", "Jacob", "Will", "Micheal", "Tristan", "Daniel" };
+    string[] randomNames = new string[] { "George", "Fred", "Phil", "Tom", "Jacob", "Will", "Michael", "Trystan", "Daniel", "Hunter", "Nate", "Nathan", "Bobber", "Bobette", "Bob", "Bobert", "Bubbles", "Becca" };
     public string RandomNickName()
     {
         return randomNames[Random.Range(0, randomNames.Length)];

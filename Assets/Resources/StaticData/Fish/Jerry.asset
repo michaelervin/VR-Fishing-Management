@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Jerry
   m_EditorClassIdentifier: 
-  modelPrefab: {fileID: 1423194686534320620, guid: ea0e9ab8c24d141479efa5723f62121e, type: 3}
+  modelPrefab: {fileID: 1423194686534320620, guid: d61959b01ad730e42a3df80d53ecadf0, type: 3}
   sprite: {fileID: 21300000, guid: ab626708d41e76a4481014cfa8be1fec, type: 3}
   cost: 69
   targetTypes:

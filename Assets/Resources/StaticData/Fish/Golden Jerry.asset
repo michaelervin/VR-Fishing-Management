@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5dab2cbabd3ea849aafdeb2d9383fb9, type: 3}
   m_Name: Golden Jerry
   m_EditorClassIdentifier: 
-  modelPrefab: {fileID: 8881701875790964946, guid: b89c105b69c493a4caa17b13d835eb30, type: 3}
-  sprite: {fileID: 0}
-  cost: 0
+  modelPrefab: {fileID: 8881701875790964946, guid: 5edd78b7fca5f5840bc971f3c44d95ba, type: 3}
+  sprite: {fileID: 21300000, guid: a3521643ec24e4f47abeb10dcd93b3c0, type: 3}
+  cost: 100
   targetTypes:
   - JerryBait
   description: What an absolute legend. This monster of a fish is the only one of
