@@ -4132,6 +4132,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dffd43401031fe4bbf9431428290d94, type: 3}
+--- !u!1 &1397125241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1641372599459066060, guid: 3dffd43401031fe4bbf9431428290d94, type: 3}
+  m_PrefabInstance: {fileID: 1397125240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1397125242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397125241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587823edd226e1b4395ebbb499dc38f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScript: {fileID: 1992545338}
+  savePath: BaitBucket.json
+  loadOnStart: 1
+  saveOnDestroy: 1
 --- !u!1 &1405430998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5143,7 +5164,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4248708565632635496, guid: 3dffd43401031fe4bbf9431428290d94, type: 3}
   m_PrefabInstance: {fileID: 1397125240}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1397125241}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5d36a32499a93d428c7b5e18329151e, type: 3}
