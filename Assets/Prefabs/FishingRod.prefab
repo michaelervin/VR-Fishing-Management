@@ -210,7 +210,7 @@ MonoBehaviour:
   tip: {fileID: 2877710954551807710}
   bobber: {fileID: 0}
   hook: {fileID: 0}
-  reelSpeed: 0.2
+  reelSpeed: 0.4
 --- !u!114 &3196458495997651215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
-  highlightOnHover: 1
+  highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
 --- !u!1001 &2748066737252783817

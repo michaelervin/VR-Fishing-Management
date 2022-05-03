@@ -78,10 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63755dd75cb2d1f46bcd84cbffcdde7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  data:
+    type: 
   staticData: {fileID: 0}
-  rb: {fileID: 0}
-  _hand: {fileID: 0}
 --- !u!114 &95547073240177241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +130,7 @@ MonoBehaviour:
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
-  highlightOnHover: 1
+  highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
 --- !u!114 &-101799096774453376
